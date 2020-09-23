@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using Recipe.API.Models;
+
 namespace Recipe.API
 {
     public class RecipesService : IRecipesService
@@ -7,6 +10,11 @@ namespace Recipe.API
         public RecipesService(IRecipesRepository recipesRepository)
         {
             this.recipesRepository = recipesRepository;
+        }
+
+        public IList<RecipeDTO> GetRecipies()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

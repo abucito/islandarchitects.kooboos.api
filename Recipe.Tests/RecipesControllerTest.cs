@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using Recipe.API;
+using Recipe.API.Models;
 
 namespace Recipe.Tests
 {
@@ -30,6 +32,24 @@ namespace Recipe.Tests
 
             // Assert
             Assert.IsTrue(result.GetType() == typeof(OkResult));
+        }
+
+        [Test]
+        public void GetRecipes_Empty_ReturnsOk()
+        {
+            // Arrange
+            recipesServiceMock = new Mock<IRecipesService>();
+            recipesServiceMock
+                .Setup(m => m.GetRecipies())
+                .Returns(new List<RecipeDTO>());
+
+            recipesController = new RecipesController(recipesServiceMock.Object);
+
+            // Act
+            var result = recipesController.GetRecipies();
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(OkObjectResult));
         }
     }
 }

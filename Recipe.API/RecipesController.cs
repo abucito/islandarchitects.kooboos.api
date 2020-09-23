@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Recipe.API
@@ -10,13 +11,21 @@ namespace Recipe.API
 
         public RecipesController(IRecipesService recipesService)
         {
-            this.recipesService = recipesService;
+            this.recipesService = recipesService ?? throw new ArgumentNullException();
         }
 
         [HttpGet]
         public IActionResult Test()
         {
             return Ok();
+        }
+
+        [HttpGet]
+        public IActionResult GetRecipies()
+        {
+            var recipes = recipesService.GetRecipies();
+
+            return Ok(recipes);
         }
     }
 }
