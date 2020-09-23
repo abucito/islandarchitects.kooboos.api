@@ -41,7 +41,7 @@ namespace Recipe.Tests
             recipesServiceMock = new Mock<IRecipesService>();
             recipesServiceMock
                 .Setup(m => m.GetRecipes())
-                .Returns(new List<RecipeDTO>());
+                .Returns(new List<RecipeDto>());
 
             recipesController = new RecipesController(recipesServiceMock.Object);
 
@@ -60,7 +60,7 @@ namespace Recipe.Tests
             recipesServiceMock = new Mock<IRecipesService>();
             recipesServiceMock
                 .Setup(m => m.GetRecipe(validRecipeId))
-                .Returns(new RecipeDTO());
+                .Returns(new RecipeDto());
 
             recipesController = new RecipesController(recipesServiceMock.Object);
 
@@ -79,7 +79,7 @@ namespace Recipe.Tests
             recipesServiceMock = new Mock<IRecipesService>();
             recipesServiceMock
                 .Setup(m => m.GetRecipe(invalidRecipeId))
-                .Returns(null as RecipeDTO);
+                .Returns(null as RecipeDto);
 
             recipesController = new RecipesController(recipesServiceMock.Object);
 

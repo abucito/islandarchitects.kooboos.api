@@ -5,8 +5,8 @@ namespace Recipe.API
 {
     public interface IRecipesService
     {
-        IList<RecipeDTO> GetRecipes();
+        IList<RecipeDto> GetRecipes();
 
-        RecipeDTO GetRecipe(int id);
+        RecipeDto GetRecipe(int id);
     }
 }
