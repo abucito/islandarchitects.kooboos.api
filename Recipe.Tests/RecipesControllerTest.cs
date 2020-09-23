@@ -40,7 +40,7 @@ namespace Recipe.Tests
             // Arrange
             recipesServiceMock = new Mock<IRecipesService>();
             recipesServiceMock
-                .Setup(m => m.GetRecipies())
+                .Setup(m => m.GetRecipes())
                 .Returns(new List<RecipeDTO>());
 
             recipesController = new RecipesController(recipesServiceMock.Object);
@@ -50,6 +50,44 @@ namespace Recipe.Tests
 
             // Assert
             Assert.IsTrue(result.GetType() == typeof(OkObjectResult));
+        }
+
+        [Test]
+        public void GetRecipe_ValidId_ReturnsOk()
+        {
+            // Arrange
+            int validRecipeId = 1;
+            recipesServiceMock = new Mock<IRecipesService>();
+            recipesServiceMock
+                .Setup(m => m.GetRecipe(validRecipeId))
+                .Returns(new RecipeDTO());
+
+            recipesController = new RecipesController(recipesServiceMock.Object);
+
+            // Act
+            var result = recipesController.GetRecipe(validRecipeId);
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(OkObjectResult));
+        }
+
+        [Test]
+        public void GetRecipe_InvalidId_ReturnNotFound()
+        {
+            // Arrange
+            int invalidRecipeId = 2;
+            recipesServiceMock = new Mock<IRecipesService>();
+            recipesServiceMock
+                .Setup(m => m.GetRecipe(invalidRecipeId))
+                .Returns(null as RecipeDTO);
+
+            recipesController = new RecipesController(recipesServiceMock.Object);
+
+            // Act
+            var result = recipesController.GetRecipe(invalidRecipeId);
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(NotFoundResult));
         }
     }
 }

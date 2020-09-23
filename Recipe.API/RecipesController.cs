@@ -23,9 +23,22 @@ namespace Recipe.API
         [HttpGet]
         public IActionResult GetRecipies()
         {
-            var recipes = recipesService.GetRecipies();
+            var recipes = recipesService.GetRecipes();
 
             return Ok(recipes);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetRecipe(int id)
+        {
+            var recipe = recipesService.GetRecipe(id);
+
+            if (recipe == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(recipe);
         }
     }
 }

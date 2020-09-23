@@ -12,7 +12,12 @@ namespace Recipe.API
             this.recipesRepository = recipesRepository;
         }
 
-        public IList<RecipeDTO> GetRecipies()
+        public IList<RecipeDTO> GetRecipes()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public RecipeDTO GetRecipe(int id)
         {
             throw new System.NotImplementedException();
         }
