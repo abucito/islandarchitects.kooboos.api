@@ -72,7 +72,7 @@ namespace Recipe.Tests
         }
 
         [Test]
-        public void GetRecipe_InvalidId_ReturnNotFound()
+        public void GetRecipe_InvalidId_ReturnsNotFound()
         {
             // Arrange
             int invalidRecipeId = 2;
@@ -88,6 +88,41 @@ namespace Recipe.Tests
 
             // Assert
             Assert.IsTrue(result.GetType() == typeof(NotFoundResult));
+        }
+
+        [Test]
+        public void CreateRecipe_WithValidationError_ReturnsBadRequestResult()
+        {
+            // Arrange
+            recipesServiceMock = new Mock<IRecipesService>();
+            recipesController = new RecipesController(recipesServiceMock.Object);
+            recipesController.ModelState.AddModelError("Some Key", "Some Error Message");
+
+            // Act
+            var result = recipesController.CreateRecipe(new RecipeForCreationDto());
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(BadRequestObjectResult));
+        }
+
+        [Test]
+        public void CreateRecipe_WithTitleAndInstructions_ReturnsCreatedResult()
+        {
+            // Arrange
+            recipesServiceMock = new Mock<IRecipesService>();
+            recipesController = new RecipesController(recipesServiceMock.Object);
+
+            var recipeForCreation = new RecipeForCreationDto
+            {
+                Title = "Cooking is fun",
+                Instruction = "You should cook the meal"
+            };
+
+            // Act
+            var result = recipesController.CreateRecipe(recipeForCreation);
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(CreatedResult));
         }
     }
 }

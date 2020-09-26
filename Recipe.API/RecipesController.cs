@@ -1,5 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
+using Recipe.API.Models;
 
 namespace Recipe.API
 {
@@ -39,6 +40,17 @@ namespace Recipe.API
             }
 
             return Ok(recipe);
+        }
+
+        [HttpPost]
+        public IActionResult CreateRecipe([FromBody] RecipeForCreationDto recipeForCreation)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Created("", null);
         }
     }
 }
