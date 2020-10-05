@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Recipe.API.Models;
 
@@ -29,7 +30,7 @@ namespace Recipe.API
             return Ok(recipes);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetRecipe")]
         public IActionResult GetRecipe(int id)
         {
             var recipe = recipesService.GetRecipe(id);
@@ -50,7 +51,22 @@ namespace Recipe.API
                 return BadRequest(ModelState);
             }
 
-            return Created("", null);
+            var recipeDto = new RecipeDto
+            {
+                Title = recipeForCreation.Title,
+                Instruction = recipeForCreation.Instruction
+            };
+
+            var idOfNewRecipe = recipesService.InsertRecipe(recipeDto);
+
+            if (idOfNewRecipe > 0)
+            {
+                return CreatedAtRoute("GetRecipe", new { Id = idOfNewRecipe }, recipeDto);
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }

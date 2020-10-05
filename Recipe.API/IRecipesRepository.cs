@@ -8,5 +8,7 @@ namespace Recipe.API
         IList<RecipeDto> GetRecipes();
 
         RecipeDto GetRecipe(int id);
+        int InsertRecipe(RecipeDto recipeDto);
+        void Save();
     }
 }

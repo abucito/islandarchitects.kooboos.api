@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
@@ -110,6 +111,9 @@ namespace Recipe.Tests
         {
             // Arrange
             recipesServiceMock = new Mock<IRecipesService>();
+            recipesServiceMock
+                .Setup(m => m.InsertRecipe(It.IsAny<RecipeDto>()))
+                .Returns(1);
             recipesController = new RecipesController(recipesServiceMock.Object);
 
             var recipeForCreation = new RecipeForCreationDto
@@ -122,7 +126,31 @@ namespace Recipe.Tests
             var result = recipesController.CreateRecipe(recipeForCreation);
 
             // Assert
-            Assert.IsTrue(result.GetType() == typeof(CreatedResult));
+            Assert.IsTrue(result.GetType() == typeof(CreatedAtRouteResult));
+        }
+
+        [Test]
+        public void CreateRecipe_SomethinWentWrongWhileInserting_Returns500InternalServerError()
+        {
+            // Arrange
+            recipesServiceMock = new Mock<IRecipesService>();
+            recipesServiceMock
+                .Setup(m => m.InsertRecipe(It.IsAny<RecipeDto>()))
+                .Returns(0);
+            recipesController = new RecipesController(recipesServiceMock.Object);
+
+            var recipeForCreation = new RecipeForCreationDto
+            {
+                Title = "Cooking is fun",
+                Instruction = "You should cook the meal"
+            };
+
+            // Act
+            var result = recipesController.CreateRecipe(recipeForCreation);
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(StatusCodeResult));
+            Assert.IsTrue(((StatusCodeResult)result).StatusCode == StatusCodes.Status500InternalServerError);
         }
     }
 }

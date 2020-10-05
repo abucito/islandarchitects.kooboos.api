@@ -13,12 +13,14 @@ namespace Recipe.API
             recipes = new List<RecipeDto> {
                 new RecipeDto
                 {
+                    Id = 1,
                     Title = "My first Recipe",
                     Instruction = "You should cook it!"
                 },
 
                 new RecipeDto
                 {
+                    Id = 2,
                     Title = "My second Recipe",
                     Instruction = "You should bake it!"
                 }
@@ -33,6 +35,19 @@ namespace Recipe.API
         public RecipeDto GetRecipe(int id)
         {
             return recipes.FirstOrDefault(r => r.Id == id);
+        }
+
+        public int InsertRecipe(RecipeDto recipeDto)
+        {
+            var idForNewRecipe = recipes.Max(r => r.Id) + 1;
+            recipeDto.Id = idForNewRecipe;
+            recipes.Add(recipeDto);
+            return idForNewRecipe;
+        }
+
+        public void Save()
+        {
+            // we do not need to do anything here
         }
     }
 }
