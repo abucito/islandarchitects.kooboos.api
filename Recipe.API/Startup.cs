@@ -19,6 +19,10 @@ namespace Recipe.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddSingleton<IRecipesRepository, InmemoryRecipeRepository>();
+
+            services.AddScoped<IRecipesService, RecipesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
