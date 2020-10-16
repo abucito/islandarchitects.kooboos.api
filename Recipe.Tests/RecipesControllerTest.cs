@@ -152,5 +152,43 @@ namespace Recipe.Tests
             Assert.IsTrue(result.GetType() == typeof(StatusCodeResult));
             Assert.IsTrue(((StatusCodeResult)result).StatusCode == StatusCodes.Status500InternalServerError);
         }
+
+        [Test]
+        public void DeleteRecipe_ValidRecipeId_ReturnsNotContent()
+        {
+            // Arrange
+            int validRecipeId = 1;
+            recipesServiceMock = new Mock<IRecipesService>();
+            recipesServiceMock
+                .Setup(m => m.GetRecipe(validRecipeId))
+                .Returns(new RecipeDto());
+
+            recipesController = new RecipesController(recipesServiceMock.Object);
+
+            // Act
+            var result = recipesController.DeleteRecipe(validRecipeId);
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(NoContentResult));
+        }
+
+        [Test]
+        public void DeleteRecipe_InvalidRecipeId_ReturnsNotFound()
+        {
+            // Arrange
+            int invalidRecipeId = 2;
+            recipesServiceMock = new Mock<IRecipesService>();
+            recipesServiceMock
+                .Setup(m => m.GetRecipe(invalidRecipeId))
+                .Returns(null as RecipeDto);
+
+            recipesController = new RecipesController(recipesServiceMock.Object);
+
+            // Act
+            var result = recipesController.DeleteRecipe(invalidRecipeId);
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(NotFoundResult));
+        }
     }
 }

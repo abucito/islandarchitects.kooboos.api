@@ -29,5 +29,11 @@ namespace Recipe.API
             recipesRepository.Save();
             return idOfNewRecipe;
         }
+
+        public void DeleteRecipe(RecipeDto recipeToDelete)
+        {
+            recipesRepository.DeleteRecipe(recipeToDelete);
+            recipesRepository.Save();
+        }
     }
 }

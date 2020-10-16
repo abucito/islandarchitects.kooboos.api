@@ -68,5 +68,20 @@ namespace Recipe.API
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteRecipe(int id)
+        {
+            var recipeToDelete = recipesService.GetRecipe(id);
+
+            if (recipeToDelete == null)
+            {
+                return NotFound();
+            }
+
+            recipesService.DeleteRecipe(recipeToDelete);
+
+            return NoContent();
+        }
     }
 }
