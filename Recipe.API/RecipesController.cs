@@ -5,7 +5,6 @@ using Recipe.API.Models;
 
 namespace Recipe.API
 {
-    // This should not be pushable
     [ApiController]
     [Route("api/recipes")]
     public class RecipesController : ControllerBase
