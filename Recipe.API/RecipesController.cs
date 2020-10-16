@@ -68,5 +68,40 @@ namespace Recipe.API
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteRecipe(int id)
+        {
+            var recipeToDelete = recipesService.GetRecipe(id);
+
+            if (recipeToDelete == null)
+            {
+                return NotFound();
+            }
+
+            recipesService.DeleteRecipe(recipeToDelete);
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult FullyUpdateRecipe(int id, [FromBody] RecipeForUpdateDto recipeForUpdate)
+        {
+            var recipeToUpdate = recipesService.GetRecipe(id);
+
+            if (recipeToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            recipesService.FullyUpdateRecipe(recipeToUpdate, recipeForUpdate);
+
+            return NoContent();
+        }
     }
 }

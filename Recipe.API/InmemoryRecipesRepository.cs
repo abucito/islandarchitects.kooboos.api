@@ -45,6 +45,21 @@ namespace Recipe.API
             return idForNewRecipe;
         }
 
+        public void DeleteRecipe(RecipeDto recipeDto)
+        {
+            var recipeToDelete = recipes.FirstOrDefault(r => r.Id == recipeDto.Id);
+            if (recipeToDelete != null)
+            {
+                recipes.Remove(recipeToDelete);
+            }
+        }
+
+        public void UpdateRecipe(RecipeDto recipeToUpdate, RecipeForUpdateDto recipeForUpdate)
+        {
+            recipeToUpdate.Title = recipeForUpdate.Title;
+            recipeToUpdate.Instruction = recipeForUpdate.Instruction;
+        }
+
         public void Save()
         {
             // we do not need to do anything here
