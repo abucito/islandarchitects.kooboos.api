@@ -12,5 +12,7 @@ namespace Recipe.API
         int InsertRecipe(RecipeDto recipeDto);
 
         void DeleteRecipe(RecipeDto recipeToDelete);
+
+        void FullyUpdateRecipe(RecipeDto recipeToUpdate, RecipeForUpdateDto recipeForUpdate);
     }
 }

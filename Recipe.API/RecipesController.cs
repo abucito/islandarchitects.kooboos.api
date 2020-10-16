@@ -83,5 +83,25 @@ namespace Recipe.API
 
             return NoContent();
         }
+
+        [HttpPut("{id}")]
+        public IActionResult FullyUpdateRecipe(int id, [FromBody] RecipeForUpdateDto recipeForUpdate)
+        {
+            var recipeToUpdate = recipesService.GetRecipe(id);
+
+            if (recipeToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            recipesService.FullyUpdateRecipe(recipeToUpdate, recipeForUpdate);
+
+            return NoContent();
+        }
     }
 }

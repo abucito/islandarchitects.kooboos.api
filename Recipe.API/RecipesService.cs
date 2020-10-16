@@ -35,5 +35,11 @@ namespace Recipe.API
             recipesRepository.DeleteRecipe(recipeToDelete);
             recipesRepository.Save();
         }
+
+        public void FullyUpdateRecipe(RecipeDto recipeToUpdate, RecipeForUpdateDto recipeForUpdate)
+        {
+            recipesRepository.UpdateRecipe(recipeToUpdate, recipeForUpdate);
+            recipesRepository.Save();
+        }
     }
 }

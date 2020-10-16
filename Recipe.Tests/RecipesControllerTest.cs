@@ -154,7 +154,7 @@ namespace Recipe.Tests
         }
 
         [Test]
-        public void DeleteRecipe_ValidRecipeId_ReturnsNotContent()
+        public void DeleteRecipe_ValidRecipeId_ReturnsNoContent()
         {
             // Arrange
             int validRecipeId = 1;
@@ -186,6 +186,64 @@ namespace Recipe.Tests
 
             // Act
             var result = recipesController.DeleteRecipe(invalidRecipeId);
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(NotFoundResult));
+        }
+
+        [Test]
+        public void FullyUpdateRecipe_ValidRecipeIdAndValidData_ReturnsNoContent()
+        {
+            // Arrange
+            int validRecipeId = 1;
+            var recipeForUpdateDto = new RecipeForUpdateDto();
+            recipesServiceMock = new Mock<IRecipesService>();
+            recipesServiceMock
+                .Setup(m => m.GetRecipe(validRecipeId))
+                .Returns(new RecipeDto());
+            recipesController = new RecipesController(recipesServiceMock.Object);
+
+            // Act
+            var result = recipesController.FullyUpdateRecipe(validRecipeId, recipeForUpdateDto);
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(NoContentResult));
+        }
+
+        [Test]
+        public void FullyUpdateRecipe_ValidRecipeIdAndInvalidData_ReturnsBadRequest()
+        {
+            // Arrange
+            int validRecipeId = 1;
+            var recipeForUpdateDto = new RecipeForUpdateDto();
+            recipesServiceMock = new Mock<IRecipesService>();
+            recipesServiceMock
+                .Setup(m => m.GetRecipe(validRecipeId))
+                .Returns(new RecipeDto());
+            recipesController = new RecipesController(recipesServiceMock.Object);
+            recipesController.ModelState.AddModelError("Some Key", "Some Error Message");
+
+            // Act
+            var result = recipesController.FullyUpdateRecipe(validRecipeId, recipeForUpdateDto);
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(BadRequestObjectResult));
+        }
+
+        [Test]
+        public void FullyUpdateRecipe_InvalidRecipeId_ReturnsNotFound()
+        {
+            // Arrange
+            int invalidRecipeId = 2;
+            var recipeForUpdateDto = new RecipeForUpdateDto();
+            recipesServiceMock = new Mock<IRecipesService>();
+            recipesServiceMock
+                .Setup(m => m.GetRecipe(invalidRecipeId))
+                .Returns(null as RecipeDto);
+            recipesController = new RecipesController(recipesServiceMock.Object);
+
+            // Act
+            var result = recipesController.FullyUpdateRecipe(invalidRecipeId, recipeForUpdateDto);
 
             // Assert
             Assert.IsTrue(result.GetType() == typeof(NotFoundResult));

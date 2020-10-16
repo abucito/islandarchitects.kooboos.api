@@ -54,6 +54,12 @@ namespace Recipe.API
             }
         }
 
+        public void UpdateRecipe(RecipeDto recipeToUpdate, RecipeForUpdateDto recipeForUpdate)
+        {
+            recipeToUpdate.Title = recipeForUpdate.Title;
+            recipeToUpdate.Instruction = recipeForUpdate.Instruction;
+        }
+
         public void Save()
         {
             // we do not need to do anything here

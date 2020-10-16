@@ -14,5 +14,7 @@ namespace Recipe.API
         void Save();
 
         void DeleteRecipe(RecipeDto recipeDto);
+
+        void UpdateRecipe(RecipeDto recipeToUpdate, RecipeForUpdateDto recipeForUpdate);
     }
 }
