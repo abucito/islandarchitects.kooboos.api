@@ -41,3 +41,6 @@ artifacts/
 
 # Local History for Visual Studio Code
 .history/
+
+# Local databases
+[Dd]atabase/
