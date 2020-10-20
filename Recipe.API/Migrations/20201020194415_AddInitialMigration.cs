@@ -11,7 +11,7 @@ namespace Recipe.API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(maxLength: 50, nullable: false),
                     Instruction = table.Column<string>(nullable: true)
                 },
