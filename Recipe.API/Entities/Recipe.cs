@@ -10,7 +10,7 @@ namespace Recipe.API.Entities
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [StringLength(50)]
         public string Title { get; set; }
 
         public string Instruction { get; set; }
