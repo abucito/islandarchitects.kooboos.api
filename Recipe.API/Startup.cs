@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Recipe.API.Contexts;
 
 namespace Recipe.API
 {
@@ -20,9 +22,12 @@ namespace Recipe.API
         {
             services.AddControllers();
 
-            services.AddSingleton<IRecipesRepository, InmemoryRecipeRepository>();
+            //services.AddSingleton<IRecipesRepository, InmemoryRecipeRepository>();
+            services.AddScoped<IRecipesRepository, RecipeRepository>();
 
             services.AddScoped<IRecipesService, RecipesService>();
+
+            services.AddDbContext<RecipeContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
