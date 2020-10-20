@@ -12,13 +12,6 @@ namespace Recipe.API
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-
-            using (var scope = host.Services.CreateScope())
-            {
-                var context = scope.ServiceProvider.GetService<RecipeContext>();
-                context.Database.Migrate();
-            }
-
             host.Run();
         }
 
