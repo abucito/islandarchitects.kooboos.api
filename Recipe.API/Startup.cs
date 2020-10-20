@@ -22,8 +22,8 @@ namespace Recipe.API
         {
             services.AddControllers();
 
-            //services.AddSingleton<IRecipesRepository, InmemoryRecipeRepository>();
-            services.AddScoped<IRecipesRepository, RecipeRepository>();
+            services.AddSingleton<IRecipesRepository, InmemoryRecipeRepository>();
+            //services.AddScoped<IRecipesRepository, RecipeRepository>();
 
             services.AddScoped<IRecipesService, RecipesService>();
 
