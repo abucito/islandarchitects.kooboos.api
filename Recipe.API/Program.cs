@@ -13,22 +13,11 @@ namespace Recipe.API
         {
             var host = CreateHostBuilder(args).Build();
 
-            // using (var scope = host.Services.CreateScope())
-            // {
-            //     try
-            //     {
-            //         var context = scope.ServiceProvider.GetService<RecipeContext>();
-
-            //         // for demo purposes, delete the database & migrate on startup so 
-            //         // we can start with a clean slate
-            //         context.Database.EnsureDeleted();
-            //         context.Database.EnsureCreated();
-            //         context.Database.Migrate();
-            //     }
-            //     catch (Exception exception)
-            //     {
-            //     }
-            // }
+            using (var scope = host.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetService<RecipeContext>();
+                context.Database.Migrate();
+            }
 
             host.Run();
         }
