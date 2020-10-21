@@ -15,23 +15,14 @@ namespace Recipe.API.Contexts
 
         public RecipeContext(
             IConfiguration configuration,
-            IWebHostEnvironment environment,
             DbContextOptions options) : base(options)
         {
             this.configuration = configuration ?? throw new ArgumentNullException();
-            this.environment = environment ?? throw new ArgumentNullException();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (environment.IsDevelopment())
-            {
-                optionsBuilder.UseSqlite(configuration.GetConnectionString("Test_RecipeDb"));
-            }
-            else
-            {
-                optionsBuilder.UseSqlServer(configuration.GetConnectionString("Test_RecipeDb"));
-            }
+            optionsBuilder.UseSqlServer(configuration.GetConnectionString("Test_RecipeDb"));
 
             base.OnConfiguring(optionsBuilder);
         }
