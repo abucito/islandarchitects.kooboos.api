@@ -27,7 +27,7 @@ namespace Recipe.API
             }
             else
             {
-                var recipeDto = mapper.Map<RecipeDto>(mapper);
+                var recipeDto = mapper.Map<RecipeDto>(recipe);
                 return recipeDto;
             }
         }

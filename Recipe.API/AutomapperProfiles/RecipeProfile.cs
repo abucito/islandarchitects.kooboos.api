@@ -9,7 +9,8 @@ namespace Recipe.API.AutomapperProfiles
         {
             CreateMap<RecipeForCreationDto, RecipeDto>();
             CreateMap<RecipeForUpdateDto, RecipeDto>();
-            CreateMap<Entities.Recipe, RecipeDto>().ReverseMap();
+            CreateMap<Entities.Recipe, RecipeDto>();
+            CreateMap<RecipeDto, Entities.Recipe>().ForMember(r => r.Id, id => id.Ignore());
         }
     }
 }

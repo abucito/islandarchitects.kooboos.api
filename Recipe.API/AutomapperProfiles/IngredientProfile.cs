@@ -8,7 +8,8 @@ namespace Recipe.API.AutomapperProfiles
     {
         public IngredientProfile()
         {
-            CreateMap<Ingredient, IngredientDto>().ReverseMap();
+            CreateMap<Ingredient, IngredientDto>();
+            CreateMap<IngredientDto, Ingredient>().ForMember(i => i.Id, id => id.Ignore());
             CreateMap<IngredientForCreationDto, IngredientDto>();
             CreateMap<IngredientForUpdateDto, IngredientDto>();
         }
