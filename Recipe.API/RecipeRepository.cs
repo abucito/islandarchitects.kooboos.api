@@ -18,15 +18,6 @@ namespace Recipe.API
             this.mapper = mapper;
         }
 
-        public void DeleteRecipe(RecipeDto recipeDto)
-        {
-            var recipeToRemove = recipeContext.Recipes.SingleOrDefault(r => r.Id == recipeDto.Id);
-            if (recipeToRemove != null)
-            {
-                recipeContext.Recipes.Remove(recipeToRemove);
-            }
-        }
-
         public RecipeDto GetRecipe(int id)
         {
             var recipe = recipeContext.Recipes.SingleOrDefault(r => r.Id == id);
@@ -51,18 +42,26 @@ namespace Recipe.API
         {
             var recipeToInsert = mapper.Map<Entities.Recipe>(recipeDto);
             recipeContext.Recipes.Add(recipeToInsert);
+            recipeContext.SaveChanges();
             return recipeToInsert.Id;
         }
 
-        public void Save()
-        {
-            recipeContext.SaveChanges();
-        }
 
         public void UpdateRecipe(RecipeDto recipeToUpdate, RecipeDto recipeDtoWithNewValues)
         {
             var recipe = recipeContext.Recipes.SingleOrDefault(r => r.Id == recipeToUpdate.Id);
             mapper.Map(recipeDtoWithNewValues, recipe);
+            recipeContext.SaveChanges();
+        }
+
+        public void DeleteRecipe(RecipeDto recipeDto)
+        {
+            var recipeToRemove = recipeContext.Recipes.SingleOrDefault(r => r.Id == recipeDto.Id);
+            if (recipeToRemove != null)
+            {
+                recipeContext.Recipes.Remove(recipeToRemove);
+            }
+            recipeContext.SaveChanges();
         }
     }
 }

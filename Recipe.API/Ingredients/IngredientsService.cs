@@ -26,20 +26,17 @@ namespace Recipe.API.Ingredients
         public int InsertIngredient(IngredientDto ingredientDto)
         {
             var newIngredientId = ingredientsRepository.InsertIngredient(ingredientDto);
-            ingredientsRepository.Save();
             return newIngredientId;
         }
 
         public void DeleteIngredient(IngredientDto ingredientToDelete)
         {
             ingredientsRepository.DeleteIngredient(ingredientToDelete);
-            ingredientsRepository.Save();
         }
 
         public void FullyUpdateIngredient(IngredientDto ingredientToUpdate, IngredientDto ingredientDtoWithNewValues)
         {
             ingredientsRepository.UpdateIngredient(ingredientToUpdate, ingredientDtoWithNewValues);
-            ingredientsRepository.Save();
         }
     }
 }

@@ -40,6 +40,7 @@ namespace Recipe.API.Ingredients
         {
             var ingredient = mapper.Map<Ingredient>(ingredientDto);
             recipeContext.Ingredients.Add(ingredient);
+            recipeContext.SaveChanges();
             return ingredient.Id;
         }
 
@@ -50,6 +51,7 @@ namespace Recipe.API.Ingredients
             {
                 mapper.Map(ingredientDtoWithNewValues, ingredient);
             }
+            recipeContext.SaveChanges();
         }
 
         public void DeleteIngredient(IngredientDto ingredientDto)
@@ -59,10 +61,7 @@ namespace Recipe.API.Ingredients
             {
                 recipeContext.Ingredients.Remove(ingredientToRemove);
             }
-        }
 
-        public void Save()
-        {
             recipeContext.SaveChanges();
         }
     }

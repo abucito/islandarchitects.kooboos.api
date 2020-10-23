@@ -55,6 +55,7 @@ namespace Recipe.API.Ingredients
 
             if (idOfNewIngredient > 0)
             {
+                ingredientDto.Id = idOfNewIngredient;
                 return CreatedAtRoute("GetIngredient", new { Id = idOfNewIngredient }, ingredientDto);
             }
             else
