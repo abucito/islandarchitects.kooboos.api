@@ -11,8 +11,6 @@ namespace Recipe.API.Contexts
     {
         private readonly IConfiguration configuration;
 
-        private readonly IWebHostEnvironment environment;
-
         public RecipeContext(
             IConfiguration configuration,
             DbContextOptions options) : base(options)

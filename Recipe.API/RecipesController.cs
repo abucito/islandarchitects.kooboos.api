@@ -16,14 +16,8 @@ namespace Recipe.API
             this.recipesService = recipesService ?? throw new ArgumentNullException();
         }
 
-        [HttpGet, Route("api/test")]
-        public IActionResult Test()
-        {
-            return Ok();
-        }
-
         [HttpGet]
-        public IActionResult GetRecipies()
+        public IActionResult GetRecipes()
         {
             var recipes = recipesService.GetRecipes();
 

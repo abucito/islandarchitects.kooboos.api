@@ -22,20 +22,6 @@ namespace Recipe.Tests
         }
 
         [Test]
-        public void EverythingSetupCorrectly()
-        {
-            // Arrange
-            recipesServiceMock = new Mock<IRecipesService>();
-            recipesController = new RecipesController(recipesServiceMock.Object);
-
-            // Act
-            var result = recipesController.Test();
-
-            // Assert
-            Assert.IsTrue(result.GetType() == typeof(OkResult));
-        }
-
-        [Test]
         public void GetRecipes_Empty_ReturnsOk()
         {
             // Arrange
@@ -47,7 +33,7 @@ namespace Recipe.Tests
             recipesController = new RecipesController(recipesServiceMock.Object);
 
             // Act
-            var result = recipesController.GetRecipies();
+            var result = recipesController.GetRecipes();
 
             // Assert
             Assert.IsTrue(result.GetType() == typeof(OkObjectResult));
