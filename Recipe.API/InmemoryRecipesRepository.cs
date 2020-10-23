@@ -54,10 +54,10 @@ namespace Recipe.API
             }
         }
 
-        public void UpdateRecipe(RecipeDto recipeToUpdate, RecipeForUpdateDto recipeForUpdate)
+        public void UpdateRecipe(RecipeDto recipeToUpdate, RecipeDto recipeDtoWithNewValues)
         {
-            recipeToUpdate.Title = recipeForUpdate.Title;
-            recipeToUpdate.Instruction = recipeForUpdate.Instruction;
+            recipeToUpdate.Title = recipeDtoWithNewValues.Title;
+            recipeToUpdate.Instruction = recipeDtoWithNewValues.Instruction;
         }
 
         public void Save()

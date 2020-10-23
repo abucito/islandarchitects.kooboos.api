@@ -36,9 +36,9 @@ namespace Recipe.API
             recipesRepository.Save();
         }
 
-        public void FullyUpdateRecipe(RecipeDto recipeToUpdate, RecipeForUpdateDto recipeForUpdate)
+        public void FullyUpdateRecipe(RecipeDto recipeToUpdate, RecipeDto recipeDtoWithNewValues)
         {
-            recipesRepository.UpdateRecipe(recipeToUpdate, recipeForUpdate);
+            recipesRepository.UpdateRecipe(recipeToUpdate, recipeDtoWithNewValues);
             recipesRepository.Save();
         }
     }

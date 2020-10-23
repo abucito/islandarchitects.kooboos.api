@@ -13,6 +13,6 @@ namespace Recipe.API.Ingredients
 
         void DeleteIngredient(IngredientDto ingredientToDelete);
 
-        void FullyUpdateIngredient(IngredientDto ingredientToUpdate, IngredientForUpdateDto ingredientForUpdateDto);
+        void FullyUpdateIngredient(IngredientDto ingredientToUpdate, IngredientDto ingredientDtoWithNewValues);
     }
 }

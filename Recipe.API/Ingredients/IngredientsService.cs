@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Recipe.API.Models;
 
@@ -9,7 +10,7 @@ namespace Recipe.API.Ingredients
 
         public IngredientsService(IIngredientsRepository ingredientsRepository)
         {
-            this.ingredientsRepository = ingredientsRepository;
+            this.ingredientsRepository = ingredientsRepository ?? throw new ArgumentNullException(nameof(ingredientsRepository));
         }
 
         public IList<IngredientDto> GetIngredients()
@@ -35,9 +36,9 @@ namespace Recipe.API.Ingredients
             ingredientsRepository.Save();
         }
 
-        public void FullyUpdateIngredient(IngredientDto ingredientToUpdate, IngredientForUpdateDto ingredientForUpdateDto)
+        public void FullyUpdateIngredient(IngredientDto ingredientToUpdate, IngredientDto ingredientDtoWithNewValues)
         {
-            ingredientsRepository.UpdateIngredient(ingredientToUpdate, ingredientForUpdateDto);
+            ingredientsRepository.UpdateIngredient(ingredientToUpdate, ingredientDtoWithNewValues);
             ingredientsRepository.Save();
         }
     }

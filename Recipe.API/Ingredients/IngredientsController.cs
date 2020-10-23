@@ -1,4 +1,5 @@
 using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Recipe.API.Models;
@@ -11,9 +12,12 @@ namespace Recipe.API.Ingredients
     {
         private readonly IIngredientsService ingredientsService;
 
-        public IngredientsController(IIngredientsService ingredientsService)
+        private readonly IMapper mapper;
+
+        public IngredientsController(IIngredientsService ingredientsService, IMapper mapper)
         {
-            this.ingredientsService = ingredientsService;
+            this.ingredientsService = ingredientsService ?? throw new ArgumentNullException(nameof(ingredientsService));
+            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
@@ -45,11 +49,7 @@ namespace Recipe.API.Ingredients
                 return BadRequest(ModelState);
             }
 
-            var ingredientDto = new IngredientDto
-            {
-                Name = ingredientForCreation.Name,
-                Description = ingredientForCreation.Description
-            };
+            var ingredientDto = mapper.Map<IngredientDto>(ingredientForCreation);
 
             var idOfNewIngredient = ingredientsService.InsertIngredient(ingredientDto);
 
@@ -93,7 +93,9 @@ namespace Recipe.API.Ingredients
                 return BadRequest(ModelState);
             }
 
-            ingredientsService.FullyUpdateIngredient(ingredientToUpdate, ingredientForUpdateDto);
+            var ingredientDtoWithNewValues = mapper.Map<IngredientDto>(ingredientForUpdateDto);
+
+            ingredientsService.FullyUpdateIngredient(ingredientToUpdate, ingredientDtoWithNewValues);
 
             return NoContent();
         }
