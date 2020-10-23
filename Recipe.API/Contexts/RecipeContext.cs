@@ -37,9 +37,21 @@ namespace Recipe.API.Contexts
                     }
                 );
 
+            modelBuilder.Entity<Ingredient>()
+                .HasData(
+                    new Ingredient
+                    {
+                        Id = 1,
+                        Name = "Black Pepper",
+                        Description = "Spice up your life!"
+                    }
+                );
+
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Entities.Recipe> Recipes { get; set; }
+
+        public DbSet<Ingredient> Ingredients { get; set; }
     }
 }

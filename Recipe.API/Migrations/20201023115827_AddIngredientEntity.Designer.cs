@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recipe.API.Contexts;
 
 namespace Recipe.API.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    partial class RecipeContextModelSnapshot : ModelSnapshot
+    [Migration("20201023115827_AddIngredientEntity")]
+    partial class AddIngredientEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

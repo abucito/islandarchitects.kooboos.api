@@ -14,27 +14,31 @@ namespace Recipe.API.Ingredients
 
         public IList<IngredientDto> GetIngredients()
         {
-            throw new System.NotImplementedException();
+            return ingredientsRepository.GetIngredients();
         }
 
-        public IngredientDto GetIngredient(int validRecipeId)
+        public IngredientDto GetIngredient(int id)
         {
-            throw new System.NotImplementedException();
+            return ingredientsRepository.GetIngredient(id);
         }
 
         public int InsertIngredient(IngredientDto ingredientDto)
         {
-            throw new System.NotImplementedException();
+            var newIngredientId = ingredientsRepository.InsertIngredient(ingredientDto);
+            ingredientsRepository.Save();
+            return newIngredientId;
         }
 
         public void DeleteIngredient(IngredientDto ingredientToDelete)
         {
-            throw new System.NotImplementedException();
+            ingredientsRepository.DeleteIngredient(ingredientToDelete);
+            ingredientsRepository.Save();
         }
 
         public void FullyUpdateIngredient(IngredientDto ingredientToUpdate, IngredientForUpdateDto ingredientForUpdateDto)
         {
-            throw new System.NotImplementedException();
+            ingredientsRepository.UpdateIngredient(ingredientToUpdate, ingredientForUpdateDto);
+            ingredientsRepository.Save();
         }
     }
 }
