@@ -95,7 +95,7 @@ namespace Recipe.Tests
         }
 
         [Test]
-        public void CreateIngredient_WithTitleAndInstructions_ReturnsCreatedResult()
+        public void CreateIngredient_WithNameAndDescription_ReturnsCreatedResult()
         {
             // Arrange
             ingredientsServiceMock = new Mock<IIngredientsService>();

@@ -10,8 +10,8 @@ namespace Recipe.API.AutomapperProfiles
         {
             CreateMap<Ingredient, IngredientDto>();
             CreateMap<IngredientDto, Ingredient>().ForMember(i => i.Id, id => id.Ignore());
-            CreateMap<IngredientForCreationDto, IngredientDto>();
-            CreateMap<IngredientForUpdateDto, IngredientDto>();
+            CreateMap<IngredientForCreationDto, IngredientDto>().ForMember(i => i.Id, id => id.Ignore());
+            CreateMap<IngredientForUpdateDto, IngredientDto>().ForMember(i => i.Id, id => id.Ignore());
         }
     }
 }

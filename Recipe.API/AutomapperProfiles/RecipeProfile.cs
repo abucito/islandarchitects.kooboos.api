@@ -7,10 +7,10 @@ namespace Recipe.API.AutomapperProfiles
     {
         public RecipeProfile()
         {
-            CreateMap<RecipeForCreationDto, RecipeDto>();
-            CreateMap<RecipeForUpdateDto, RecipeDto>();
+            CreateMap<RecipeForCreationDto, RecipeDto>().ForMember(r => r.Id, id => id.Ignore());
+            CreateMap<RecipeForUpdateDto, RecipeDto>().ForMember(r => r.Id, id => id.Ignore());
             CreateMap<Entities.Recipe, RecipeDto>();
-            CreateMap<RecipeDto, Entities.Recipe>().ForMember(r => r.Id, id => id.Ignore());
+            CreateMap<RecipeDto, Entities.Recipe>().ForMember(r => r.Id, id => id.Ignore()).ForMember(r => r.IngredientsList, il => il.Ignore());
         }
     }
 }
