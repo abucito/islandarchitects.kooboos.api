@@ -3,12 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Recipe.API.Entities
 {
-    public class IngredientsListItem
+    public class IngredientsListItem : EntityBase
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-
         [ForeignKey("IngredientsListId")]
         public IngredientsList IngredientsList { get; set; }
 
