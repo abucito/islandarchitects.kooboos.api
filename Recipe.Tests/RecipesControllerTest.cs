@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using Recipe.API;
+using Recipe.API.AutomapperProfiles;
 using Recipe.API.Models;
 
 namespace Recipe.Tests
@@ -16,12 +17,13 @@ namespace Recipe.Tests
 
         private RecipesController recipesController;
 
-        private Mock<IMapper> automapperMock;
+        private IMapper mapper;
 
-        [SetUp]
-        public void Setup()
+        [OneTimeSetUp]
+        public void OneTimeSetup()
         {
-            automapperMock = new Mock<IMapper>();
+            var mapperConfiguration = new MapperConfiguration(c => c.AddProfile<RecipeProfile>());
+            mapper = mapperConfiguration.CreateMapper();
         }
 
         [Test]
@@ -33,7 +35,7 @@ namespace Recipe.Tests
                 .Setup(m => m.GetRecipes())
                 .Returns(new List<RecipeDto>());
 
-            recipesController = new RecipesController(recipesServiceMock.Object, automapperMock.Object);
+            recipesController = new RecipesController(recipesServiceMock.Object, mapper);
 
             // Act
             var result = recipesController.GetRecipes();
@@ -52,7 +54,7 @@ namespace Recipe.Tests
                 .Setup(m => m.GetRecipe(validRecipeId))
                 .Returns(new RecipeDto());
 
-            recipesController = new RecipesController(recipesServiceMock.Object, automapperMock.Object);
+            recipesController = new RecipesController(recipesServiceMock.Object, mapper);
 
             // Act
             var result = recipesController.GetRecipe(validRecipeId);
@@ -71,7 +73,7 @@ namespace Recipe.Tests
                 .Setup(m => m.GetRecipe(invalidRecipeId))
                 .Returns(null as RecipeDto);
 
-            recipesController = new RecipesController(recipesServiceMock.Object, automapperMock.Object);
+            recipesController = new RecipesController(recipesServiceMock.Object, mapper);
 
             // Act
             var result = recipesController.GetRecipe(invalidRecipeId);
@@ -85,7 +87,7 @@ namespace Recipe.Tests
         {
             // Arrange
             recipesServiceMock = new Mock<IRecipesService>();
-            recipesController = new RecipesController(recipesServiceMock.Object, automapperMock.Object);
+            recipesController = new RecipesController(recipesServiceMock.Object, mapper);
             recipesController.ModelState.AddModelError("Some Key", "Some Error Message");
 
             // Act
@@ -103,7 +105,7 @@ namespace Recipe.Tests
             recipesServiceMock
                 .Setup(m => m.InsertRecipe(It.IsAny<RecipeDto>()))
                 .Returns(1);
-            recipesController = new RecipesController(recipesServiceMock.Object, automapperMock.Object);
+            recipesController = new RecipesController(recipesServiceMock.Object, mapper);
 
             var recipeForCreation = new RecipeForCreationDto
             {
@@ -126,7 +128,7 @@ namespace Recipe.Tests
             recipesServiceMock
                 .Setup(m => m.InsertRecipe(It.IsAny<RecipeDto>()))
                 .Returns(0);
-            recipesController = new RecipesController(recipesServiceMock.Object, automapperMock.Object);
+            recipesController = new RecipesController(recipesServiceMock.Object, mapper);
 
             var recipeForCreation = new RecipeForCreationDto
             {
@@ -152,7 +154,7 @@ namespace Recipe.Tests
                 .Setup(m => m.GetRecipe(validRecipeId))
                 .Returns(new RecipeDto());
 
-            recipesController = new RecipesController(recipesServiceMock.Object, automapperMock.Object);
+            recipesController = new RecipesController(recipesServiceMock.Object, mapper);
 
             // Act
             var result = recipesController.DeleteRecipe(validRecipeId);
@@ -171,7 +173,7 @@ namespace Recipe.Tests
                 .Setup(m => m.GetRecipe(invalidRecipeId))
                 .Returns(null as RecipeDto);
 
-            recipesController = new RecipesController(recipesServiceMock.Object, automapperMock.Object);
+            recipesController = new RecipesController(recipesServiceMock.Object, mapper);
 
             // Act
             var result = recipesController.DeleteRecipe(invalidRecipeId);
@@ -190,7 +192,7 @@ namespace Recipe.Tests
             recipesServiceMock
                 .Setup(m => m.GetRecipe(validRecipeId))
                 .Returns(new RecipeDto());
-            recipesController = new RecipesController(recipesServiceMock.Object, automapperMock.Object);
+            recipesController = new RecipesController(recipesServiceMock.Object, mapper);
 
             // Act
             var result = recipesController.FullyUpdateRecipe(validRecipeId, recipeForUpdateDto);
@@ -209,7 +211,7 @@ namespace Recipe.Tests
             recipesServiceMock
                 .Setup(m => m.GetRecipe(validRecipeId))
                 .Returns(new RecipeDto());
-            recipesController = new RecipesController(recipesServiceMock.Object, automapperMock.Object);
+            recipesController = new RecipesController(recipesServiceMock.Object, mapper);
             recipesController.ModelState.AddModelError("Some Key", "Some Error Message");
 
             // Act
@@ -229,7 +231,7 @@ namespace Recipe.Tests
             recipesServiceMock
                 .Setup(m => m.GetRecipe(invalidRecipeId))
                 .Returns(null as RecipeDto);
-            recipesController = new RecipesController(recipesServiceMock.Object, automapperMock.Object);
+            recipesController = new RecipesController(recipesServiceMock.Object, mapper);
 
             // Act
             var result = recipesController.FullyUpdateRecipe(invalidRecipeId, recipeForUpdateDto);
