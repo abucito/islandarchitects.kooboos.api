@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Recipe.API.Contexts;
 using Recipe.API.Models;
 using System.Linq;
+using AutoMapper;
 
 namespace Recipe.API
 {
@@ -9,18 +10,12 @@ namespace Recipe.API
     {
         private readonly RecipeContext recipeContext;
 
-        public RecipeRepository(RecipeContext recipeContext)
+        private readonly IMapper mapper;
+
+        public RecipeRepository(RecipeContext recipeContext, IMapper mapper)
         {
             this.recipeContext = recipeContext;
-        }
-
-        public void DeleteRecipe(RecipeDto recipeDto)
-        {
-            var recipeToRemove = recipeContext.Recipes.SingleOrDefault(r => r.Id == recipeDto.Id);
-            if (recipeToRemove != null)
-            {
-                recipeContext.Recipes.Remove(recipeToRemove);
-            }
+            this.mapper = mapper;
         }
 
         public RecipeDto GetRecipe(int id)
@@ -32,50 +27,41 @@ namespace Recipe.API
             }
             else
             {
-                return TranformToRecipeDto(recipe);
+                var recipeDto = mapper.Map<RecipeDto>(recipe);
+                return recipeDto;
             }
-        }
-
-        private RecipeDto TranformToRecipeDto(Entities.Recipe recipe)
-        {
-            return new RecipeDto
-            {
-                Title = recipe.Title,
-                Instruction = recipe.Instruction
-            };
         }
 
         public IList<RecipeDto> GetRecipes()
         {
-            var recipes = recipeContext.Recipes.ToList().Select(r => TranformToRecipeDto(r)).ToList();
+            var recipes = recipeContext.Recipes.ToList().Select(r => mapper.Map<RecipeDto>(r)).ToList();
             return recipes;
         }
 
         public int InsertRecipe(RecipeDto recipeDto)
         {
-            var recipeToInsert = new Entities.Recipe
-            {
-                Title = recipeDto.Title,
-                Instruction = recipeDto.Instruction
-            };
-
+            var recipeToInsert = mapper.Map<Entities.Recipe>(recipeDto);
             recipeContext.Recipes.Add(recipeToInsert);
+            recipeContext.SaveChanges();
             return recipeToInsert.Id;
         }
 
-        public void Save()
+
+        public void UpdateRecipe(RecipeDto recipeToUpdate, RecipeDto recipeDtoWithNewValues)
         {
+            var recipe = recipeContext.Recipes.SingleOrDefault(r => r.Id == recipeToUpdate.Id);
+            mapper.Map(recipeDtoWithNewValues, recipe);
             recipeContext.SaveChanges();
         }
 
-        public void UpdateRecipe(RecipeDto recipeToUpdate, RecipeForUpdateDto recipeForUpdate)
+        public void DeleteRecipe(RecipeDto recipeDto)
         {
-            var recipe = recipeContext.Recipes.SingleOrDefault(r => r.Id == recipeToUpdate.Id);
-            if (recipe != null)
+            var recipeToRemove = recipeContext.Recipes.SingleOrDefault(r => r.Id == recipeDto.Id);
+            if (recipeToRemove != null)
             {
-                recipe.Title = recipeForUpdate.Title;
-                recipe.Instruction = recipeForUpdate.Instruction;
+                recipeContext.Recipes.Remove(recipeToRemove);
             }
+            recipeContext.SaveChanges();
         }
     }
 }

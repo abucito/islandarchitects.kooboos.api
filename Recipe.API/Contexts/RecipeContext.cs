@@ -11,8 +11,6 @@ namespace Recipe.API.Contexts
     {
         private readonly IConfiguration configuration;
 
-        private readonly IWebHostEnvironment environment;
-
         public RecipeContext(
             IConfiguration configuration,
             DbContextOptions options) : base(options)
@@ -39,9 +37,30 @@ namespace Recipe.API.Contexts
                     }
                 );
 
+            modelBuilder.Entity<Ingredient>()
+                .HasData(
+                    new Ingredient
+                    {
+                        Id = 1,
+                        Name = "Black Pepper",
+                        Description = "Spice up your life!"
+                    }
+                );
+
+            modelBuilder.Entity<Unit>()
+            .HasData(
+                new Unit
+                {
+                    Id = 1,
+                    Name = "Spoon"
+                }
+            );
+
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Entities.Recipe> Recipes { get; set; }
+
+        public DbSet<Ingredient> Ingredients { get; set; }
     }
 }

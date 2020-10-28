@@ -11,10 +11,8 @@ namespace Recipe.API
 
         int InsertRecipe(RecipeDto recipeDto);
 
-        void Save();
-
         void DeleteRecipe(RecipeDto recipeDto);
 
-        void UpdateRecipe(RecipeDto recipeToUpdate, RecipeForUpdateDto recipeForUpdate);
+        void UpdateRecipe(RecipeDto recipeToUpdate, RecipeDto recipeDtoWithNewValues);
     }
 }

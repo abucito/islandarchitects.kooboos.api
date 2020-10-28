@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recipe.API.Contexts;
 
 namespace Recipe.API.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    partial class RecipeContextModelSnapshot : ModelSnapshot
+    [Migration("20201025185216_Add IngredientsList, IngredientsListItem and Unit to db schema")]
+    partial class AddIngredientsListIngredientsListItemandUnittodbschema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,30 +91,6 @@ namespace Recipe.API.Migrations
                             Id = 1,
                             Instruction = "Just some Instructions",
                             Title = "WTF Recipe"
-                        });
-                });
-
-            modelBuilder.Entity("Recipe.API.Entities.Unit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Unit");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Spoon"
                         });
                 });
 

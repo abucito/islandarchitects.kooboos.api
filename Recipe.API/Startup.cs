@@ -1,3 +1,5 @@
+using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Recipe.API.Contexts;
+using Recipe.API.Ingredients;
+using Recipe.API.Units;
 
 namespace Recipe.API
 {
@@ -22,10 +26,17 @@ namespace Recipe.API
         {
             services.AddControllers();
 
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             //services.AddSingleton<IRecipesRepository, InmemoryRecipeRepository>();
             services.AddScoped<IRecipesRepository, RecipeRepository>();
-
             services.AddScoped<IRecipesService, RecipesService>();
+
+            services.AddScoped<IIngredientsRepository, IngredientsRepository>();
+            services.AddScoped<IIngredientsService, IngredientsService>();
+
+            services.AddScoped<IUnitsRepository, UnitsRepository>();
+            services.AddScoped<IUnitsService, UnitsService>();
 
             services.AddDbContext<RecipeContext>();
         }

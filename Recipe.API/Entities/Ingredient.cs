@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Recipe.API.Entities
 {
-    public class Recipe : IEntityBase
+    public class Ingredient : IEntityBase
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -11,10 +11,8 @@ namespace Recipe.API.Entities
 
         [Required]
         [StringLength(50)]
-        public string Title { get; set; }
+        public string Name { get; set; }
 
-        public string Instruction { get; set; }
-
-        public IngredientsList IngredientsList { get; set; }
+        public string Description { get; set; }
     }
 }

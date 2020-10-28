@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Recipe.API.Contexts;
 
 namespace Recipe.API.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    partial class RecipeContextModelSnapshot : ModelSnapshot
+    [Migration("20201023115827_AddIngredientEntity")]
+    partial class AddIngredientEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,24 +48,6 @@ namespace Recipe.API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Recipe.API.Entities.IngredientsList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecipeId")
-                        .IsUnique();
-
-                    b.ToTable("IngredientsList");
-                });
-
             modelBuilder.Entity("Recipe.API.Entities.Recipe", b =>
                 {
                     b.Property<int>("Id")
@@ -90,39 +74,6 @@ namespace Recipe.API.Migrations
                             Instruction = "Just some Instructions",
                             Title = "WTF Recipe"
                         });
-                });
-
-            modelBuilder.Entity("Recipe.API.Entities.Unit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Unit");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Spoon"
-                        });
-                });
-
-            modelBuilder.Entity("Recipe.API.Entities.IngredientsList", b =>
-                {
-                    b.HasOne("Recipe.API.Entities.Recipe", "Recipe")
-                        .WithOne("IngredientsList")
-                        .HasForeignKey("Recipe.API.Entities.IngredientsList", "RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

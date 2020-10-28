@@ -1,4 +1,5 @@
 using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Recipe.API.Models;
@@ -11,19 +12,16 @@ namespace Recipe.API
     {
         private readonly IRecipesService recipesService;
 
-        public RecipesController(IRecipesService recipesService)
-        {
-            this.recipesService = recipesService ?? throw new ArgumentNullException();
-        }
+        private readonly IMapper mapper;
 
-        [HttpGet, Route("api/test")]
-        public IActionResult Test()
+        public RecipesController(IRecipesService recipesService, IMapper mapper)
         {
-            return Ok();
+            this.recipesService = recipesService ?? throw new ArgumentNullException(nameof(recipesService));
+            this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
-        public IActionResult GetRecipies()
+        public IActionResult GetRecipes()
         {
             var recipes = recipesService.GetRecipes();
 
@@ -51,16 +49,12 @@ namespace Recipe.API
                 return BadRequest(ModelState);
             }
 
-            var recipeDto = new RecipeDto
-            {
-                Title = recipeForCreation.Title,
-                Instruction = recipeForCreation.Instruction
-            };
-
+            var recipeDto = mapper.Map<RecipeDto>(recipeForCreation);
             var idOfNewRecipe = recipesService.InsertRecipe(recipeDto);
 
             if (idOfNewRecipe > 0)
             {
+                recipeDto.Id = idOfNewRecipe;
                 return CreatedAtRoute("GetRecipe", new { Id = idOfNewRecipe }, recipeDto);
             }
             else
@@ -99,7 +93,9 @@ namespace Recipe.API
                 return BadRequest(ModelState);
             }
 
-            recipesService.FullyUpdateRecipe(recipeToUpdate, recipeForUpdate);
+            var recipeDtoWithNewValues = mapper.Map<RecipeDto>(recipeForUpdate);
+
+            recipesService.FullyUpdateRecipe(recipeToUpdate, recipeDtoWithNewValues);
 
             return NoContent();
         }

@@ -13,6 +13,6 @@ namespace Recipe.API
 
         void DeleteRecipe(RecipeDto recipeToDelete);
 
-        void FullyUpdateRecipe(RecipeDto recipeToUpdate, RecipeForUpdateDto recipeForUpdate);
+        void FullyUpdateRecipe(RecipeDto recipeToUpdate, RecipeDto recipeDtoWithNewValues);
     }
 }

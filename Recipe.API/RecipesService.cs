@@ -26,20 +26,17 @@ namespace Recipe.API
         public int InsertRecipe(RecipeDto recipeDto)
         {
             var idOfNewRecipe = recipesRepository.InsertRecipe(recipeDto);
-            recipesRepository.Save();
             return idOfNewRecipe;
         }
 
         public void DeleteRecipe(RecipeDto recipeToDelete)
         {
             recipesRepository.DeleteRecipe(recipeToDelete);
-            recipesRepository.Save();
         }
 
-        public void FullyUpdateRecipe(RecipeDto recipeToUpdate, RecipeForUpdateDto recipeForUpdate)
+        public void FullyUpdateRecipe(RecipeDto recipeToUpdate, RecipeDto recipeDtoWithNewValues)
         {
-            recipesRepository.UpdateRecipe(recipeToUpdate, recipeForUpdate);
-            recipesRepository.Save();
+            recipesRepository.UpdateRecipe(recipeToUpdate, recipeDtoWithNewValues);
         }
     }
 }
