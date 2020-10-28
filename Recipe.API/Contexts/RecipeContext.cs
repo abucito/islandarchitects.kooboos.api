@@ -47,6 +47,15 @@ namespace Recipe.API.Contexts
                     }
                 );
 
+            modelBuilder.Entity<Unit>()
+            .HasData(
+                new Unit
+                {
+                    Id = 1,
+                    Name = "Spoon"
+                }
+            );
+
             base.OnModelCreating(modelBuilder);
         }
 

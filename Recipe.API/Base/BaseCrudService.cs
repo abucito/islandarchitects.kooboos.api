@@ -26,17 +26,17 @@ namespace Recipe.API.Base
             return baseCrudRepository.GetById(id);
         }
 
-        public int InsertIngredient(T dtoToInsert)
+        public int Insert(T dtoToInsert)
         {
             return baseCrudRepository.Insert(dtoToInsert);
         }
 
-        public void DeleteIngredient(int entityId)
+        public void Delete(int entityId)
         {
             baseCrudRepository.Delete(entityId);
         }
 
-        public void FullyUpdateIngredient(int entityId, T dtoWithNewValues)
+        public void FullyUpdate(int entityId, T dtoWithNewValues)
         {
             baseCrudRepository.Update(entityId, dtoWithNewValues);
         }

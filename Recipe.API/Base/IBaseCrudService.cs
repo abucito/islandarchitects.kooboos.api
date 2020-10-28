@@ -12,10 +12,10 @@ namespace Recipe.API.Base
 
         T GetById(int id);
 
-        int InsertIngredient(T dtoToInsert);
+        int Insert(T dtoToInsert);
 
-        void DeleteIngredient(int entityId);
+        void Delete(int entityId);
 
-        void FullyUpdateIngredient(int entityId, T dtoWithNewValues);
+        void FullyUpdate(int entityId, T dtoWithNewValues);
     }
 }
