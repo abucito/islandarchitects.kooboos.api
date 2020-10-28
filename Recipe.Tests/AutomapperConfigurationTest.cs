@@ -28,5 +28,15 @@ namespace Recipe.Tests
 
             configuration.AssertConfigurationIsValid();
         }
+
+        [Test]
+        public void Automapper_UnitProfile_IsValid()
+        {
+            var configuration = new MapperConfiguration(
+                c => c.AddProfile<UnitProfile>()
+            );
+
+            configuration.AssertConfigurationIsValid();
+        }
     }
 }

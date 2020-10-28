@@ -59,7 +59,7 @@ namespace Recipe.API.Base
 
         public void Update(int entityId, T dtoWithNewValues)
         {
-            var entity = recipeContext.Find<T>(entityId);
+            var entity = recipeContext.Find<E>(entityId);
             if (entity != null)
             {
                 mapper.Map(dtoWithNewValues, entity);
