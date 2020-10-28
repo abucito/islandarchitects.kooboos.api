@@ -9,7 +9,7 @@ using Recipe.API.Models;
 namespace Recipe.API.Base
 {
     public abstract class BaseCrudRepository<E, T> : IBaseCrudRepository<E, T>
-        where E : EntityBase
+        where E : class, IEntityBase
         where T : class
     {
         private readonly RecipeContext recipeContext;

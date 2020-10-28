@@ -6,7 +6,7 @@ using Recipe.API.Models;
 namespace Recipe.API.Base
 {
     public abstract class BaseCrudService<E, T> : IBaseCrudService<E, T>
-        where E : EntityBase
+        where E : class, IEntityBase
         where T : class
     {
         private readonly IBaseCrudRepository<E, T> baseCrudRepository;

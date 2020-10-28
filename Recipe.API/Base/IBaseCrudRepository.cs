@@ -5,7 +5,7 @@ using Recipe.API.Models;
 namespace Recipe.API.Base
 {
     public interface IBaseCrudRepository<E, T>
-        where E : EntityBase
+        where E : class, IEntityBase
         where T : class
     {
         IList<T> GetAll();

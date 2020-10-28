@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Recipe.API.Entities
 {
-    public abstract class EntityBase
+    public interface IEntityBase
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id;
+        int Id { get; set; }
     }
 }
