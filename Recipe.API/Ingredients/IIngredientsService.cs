@@ -1,18 +1,12 @@
 using System.Collections.Generic;
+using Recipe.API.Base;
+using Recipe.API.Entities;
 using Recipe.API.Models;
 
 namespace Recipe.API.Ingredients
 {
-    public interface IIngredientsService
+    public interface IIngredientsService : IBaseCrudService<Ingredient, IngredientDto>
     {
-        IList<IngredientDto> GetIngredients();
 
-        IngredientDto GetIngredient(int validRecipeId);
-
-        int InsertIngredient(IngredientDto ingredientDto);
-
-        void DeleteIngredient(IngredientDto ingredientToDelete);
-
-        void FullyUpdateIngredient(IngredientDto ingredientToUpdate, IngredientDto ingredientDtoWithNewValues);
     }
 }

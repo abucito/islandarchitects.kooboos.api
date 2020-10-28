@@ -32,7 +32,7 @@ namespace Recipe.Tests
             // Arrange
             ingredientsServiceMock = new Mock<IIngredientsService>();
             ingredientsServiceMock
-                .Setup(m => m.GetIngredients())
+                .Setup(m => m.GetAll())
                 .Returns(new List<IngredientDto>());
             ingredientsController = new IngredientsController(ingredientsServiceMock.Object, mapper);
 
@@ -50,7 +50,7 @@ namespace Recipe.Tests
             int validRecipeId = 1;
             ingredientsServiceMock = new Mock<IIngredientsService>();
             ingredientsServiceMock
-                .Setup(m => m.GetIngredient(validRecipeId))
+                .Setup(m => m.GetById(validRecipeId))
                 .Returns(new IngredientDto());
 
             ingredientsController = new IngredientsController(ingredientsServiceMock.Object, mapper);
@@ -69,7 +69,7 @@ namespace Recipe.Tests
             int invalidRecipeId = 2;
             ingredientsServiceMock = new Mock<IIngredientsService>();
             ingredientsServiceMock
-                .Setup(m => m.GetIngredient(invalidRecipeId))
+                .Setup(m => m.GetById(invalidRecipeId))
                 .Returns(null as IngredientDto);
 
             ingredientsController = new IngredientsController(ingredientsServiceMock.Object, mapper);
@@ -102,7 +102,7 @@ namespace Recipe.Tests
             // Arrange
             ingredientsServiceMock = new Mock<IIngredientsService>();
             ingredientsServiceMock
-                .Setup(m => m.InsertIngredient(It.IsAny<IngredientDto>()))
+                .Setup(m => m.Insert(It.IsAny<IngredientDto>()))
                 .Returns(1);
             ingredientsController = new IngredientsController(ingredientsServiceMock.Object, mapper);
 
@@ -125,7 +125,7 @@ namespace Recipe.Tests
             // Arrange
             ingredientsServiceMock = new Mock<IIngredientsService>();
             ingredientsServiceMock
-                .Setup(m => m.InsertIngredient(It.IsAny<IngredientDto>()))
+                .Setup(m => m.Insert(It.IsAny<IngredientDto>()))
                 .Returns(0);
             ingredientsController = new IngredientsController(ingredientsServiceMock.Object, mapper);
 
@@ -150,7 +150,7 @@ namespace Recipe.Tests
             int validRecipeId = 1;
             ingredientsServiceMock = new Mock<IIngredientsService>();
             ingredientsServiceMock
-                .Setup(m => m.GetIngredient(validRecipeId))
+                .Setup(m => m.GetById(validRecipeId))
                 .Returns(new IngredientDto());
 
             ingredientsController = new IngredientsController(ingredientsServiceMock.Object, mapper);
@@ -169,7 +169,7 @@ namespace Recipe.Tests
             int invalidRecipeId = 2;
             ingredientsServiceMock = new Mock<IIngredientsService>();
             ingredientsServiceMock
-                .Setup(m => m.GetIngredient(invalidRecipeId))
+                .Setup(m => m.GetById(invalidRecipeId))
                 .Returns(null as IngredientDto);
 
             ingredientsController = new IngredientsController(ingredientsServiceMock.Object, mapper);
@@ -189,7 +189,7 @@ namespace Recipe.Tests
             var ingredientForUpdateDto = new IngredientForUpdateDto();
             ingredientsServiceMock = new Mock<IIngredientsService>();
             ingredientsServiceMock
-                .Setup(m => m.GetIngredient(validIngredientId))
+                .Setup(m => m.GetById(validIngredientId))
                 .Returns(new IngredientDto());
             ingredientsController = new IngredientsController(ingredientsServiceMock.Object, mapper);
 
@@ -208,7 +208,7 @@ namespace Recipe.Tests
             var ingredientForUpdateDto = new IngredientForUpdateDto();
             ingredientsServiceMock = new Mock<IIngredientsService>();
             ingredientsServiceMock
-                .Setup(m => m.GetIngredient(validIngredientId))
+                .Setup(m => m.GetById(validIngredientId))
                 .Returns(new IngredientDto());
             ingredientsController = new IngredientsController(ingredientsServiceMock.Object, mapper);
             ingredientsController.ModelState.AddModelError("Some Key", "Some Error Message");
@@ -228,7 +228,7 @@ namespace Recipe.Tests
             var ingredientForUpdateDto = new IngredientForUpdateDto();
             ingredientsServiceMock = new Mock<IIngredientsService>();
             ingredientsServiceMock
-                .Setup(m => m.GetIngredient(invalidIngredientId))
+                .Setup(m => m.GetById(invalidIngredientId))
                 .Returns(null as IngredientDto);
             ingredientsController = new IngredientsController(ingredientsServiceMock.Object, mapper);
 

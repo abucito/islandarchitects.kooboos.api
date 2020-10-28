@@ -23,7 +23,7 @@ namespace Recipe.API.Ingredients
         [HttpGet]
         public IActionResult GetIngredients()
         {
-            var ingredients = ingredientsService.GetIngredients();
+            var ingredients = ingredientsService.GetAll();
 
             return Ok(ingredients);
         }
@@ -31,7 +31,7 @@ namespace Recipe.API.Ingredients
         [HttpGet("{id}", Name = "GetIngredient")]
         public IActionResult GetIngredient(int id)
         {
-            var ingredient = ingredientsService.GetIngredient(id);
+            var ingredient = ingredientsService.GetById(id);
 
             if (ingredient == null)
             {
@@ -51,7 +51,7 @@ namespace Recipe.API.Ingredients
 
             var ingredientDto = mapper.Map<IngredientDto>(ingredientForCreation);
 
-            var idOfNewIngredient = ingredientsService.InsertIngredient(ingredientDto);
+            var idOfNewIngredient = ingredientsService.Insert(ingredientDto);
 
             if (idOfNewIngredient > 0)
             {
@@ -67,14 +67,14 @@ namespace Recipe.API.Ingredients
         [HttpDelete("{id}")]
         public IActionResult DeleteIngredient(int id)
         {
-            var ingredientToDelete = ingredientsService.GetIngredient(id);
+            var ingredientToDelete = ingredientsService.GetById(id);
 
             if (ingredientToDelete == null)
             {
                 return NotFound();
             }
 
-            ingredientsService.DeleteIngredient(ingredientToDelete);
+            ingredientsService.Delete(id);
 
             return NoContent();
         }
@@ -82,7 +82,7 @@ namespace Recipe.API.Ingredients
         [HttpPut("{id}")]
         public IActionResult FullyUpdateIngredient(int id, IngredientForUpdateDto ingredientForUpdateDto)
         {
-            var ingredientToUpdate = ingredientsService.GetIngredient(id);
+            var ingredientToUpdate = ingredientsService.GetById(id);
 
             if (ingredientToUpdate == null)
             {
@@ -96,7 +96,7 @@ namespace Recipe.API.Ingredients
 
             var ingredientDtoWithNewValues = mapper.Map<IngredientDto>(ingredientForUpdateDto);
 
-            ingredientsService.FullyUpdateIngredient(ingredientToUpdate, ingredientDtoWithNewValues);
+            ingredientsService.FullyUpdate(id, ingredientDtoWithNewValues);
 
             return NoContent();
         }
