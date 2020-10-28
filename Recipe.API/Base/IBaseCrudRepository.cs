@@ -4,18 +4,18 @@ using Recipe.API.Models;
 
 namespace Recipe.API.Base
 {
-    public interface IBaseCrudRepository<E, T>
-        where E : class, IEntityBase
-        where T : class
+    public interface IBaseCrudRepository<TEntity, TDto>
+        where TEntity : class, IEntityBase
+        where TDto : class
     {
-        IList<T> GetAll();
+        IList<TDto> GetAll();
 
-        T GetById(int id);
+        TDto GetById(int id);
 
-        int Insert(T dtoToInsert);
+        int Insert(TDto dtoToInsert);
 
         void Delete(int entityId);
 
-        void Update(int entityId, T dtoWithNewValues);
+        void Update(int entityId, TDto dtoWithNewValues);
     }
 }

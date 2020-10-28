@@ -5,28 +5,28 @@ using Recipe.API.Models;
 
 namespace Recipe.API.Base
 {
-    public abstract class BaseCrudService<E, T> : IBaseCrudService<E, T>
-        where E : class, IEntityBase
-        where T : class
+    public abstract class BaseCrudService<TEntity, TDto> : IBaseCrudService<TEntity, TDto>
+        where TEntity : class, IEntityBase
+        where TDto : class
     {
-        private readonly IBaseCrudRepository<E, T> baseCrudRepository;
+        private readonly IBaseCrudRepository<TEntity, TDto> baseCrudRepository;
 
-        public BaseCrudService(IBaseCrudRepository<E, T> baseCrudRepository)
+        public BaseCrudService(IBaseCrudRepository<TEntity, TDto> baseCrudRepository)
         {
             this.baseCrudRepository = baseCrudRepository ?? throw new ArgumentNullException(nameof(baseCrudRepository));
         }
 
-        public IList<T> GetAll()
+        public IList<TDto> GetAll()
         {
             return baseCrudRepository.GetAll();
         }
 
-        public T GetById(int id)
+        public TDto GetById(int id)
         {
             return baseCrudRepository.GetById(id);
         }
 
-        public int Insert(T dtoToInsert)
+        public int Insert(TDto dtoToInsert)
         {
             return baseCrudRepository.Insert(dtoToInsert);
         }
@@ -36,7 +36,7 @@ namespace Recipe.API.Base
             baseCrudRepository.Delete(entityId);
         }
 
-        public void FullyUpdate(int entityId, T dtoWithNewValues)
+        public void FullyUpdate(int entityId, TDto dtoWithNewValues)
         {
             baseCrudRepository.Update(entityId, dtoWithNewValues);
         }
