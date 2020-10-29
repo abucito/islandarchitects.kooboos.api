@@ -3,6 +3,7 @@ using Kooboos.API.Models;
 
 namespace Kooboos.API.Recipe
 {
+    // Kooboos is great
     public interface IRecipesService
     {
         IList<RecipeDto> GetRecipes();
