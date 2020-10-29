@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Recipe.API.Contexts;
 using Recipe.API.Ingredients;
+using Recipe.API.Recipe;
 using Recipe.API.Units;
 
 namespace Recipe.API
@@ -28,7 +29,6 @@ namespace Recipe.API
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            //services.AddSingleton<IRecipesRepository, InmemoryRecipeRepository>();
             services.AddScoped<IRecipesRepository, RecipeRepository>();
             services.AddScoped<IRecipesService, RecipesService>();
 

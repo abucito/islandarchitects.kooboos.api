@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Recipe.API.Models;
 
-namespace Recipe.API
+namespace Recipe.API.Recipe
 {
     public class RecipesService : IRecipesService
     {

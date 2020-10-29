@@ -7,6 +7,7 @@ using NUnit.Framework;
 using Recipe.API;
 using Recipe.API.AutomapperProfiles;
 using Recipe.API.Models;
+using Recipe.API.Recipe;
 
 namespace Recipe.Tests
 {

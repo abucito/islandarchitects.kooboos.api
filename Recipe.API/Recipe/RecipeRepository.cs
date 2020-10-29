@@ -4,7 +4,7 @@ using Recipe.API.Models;
 using System.Linq;
 using AutoMapper;
 
-namespace Recipe.API
+namespace Recipe.API.Recipe
 {
     public class RecipeRepository : IRecipesRepository
     {

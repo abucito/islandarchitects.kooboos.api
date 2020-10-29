@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Recipe.API.Models;
 
-namespace Recipe.API
+namespace Recipe.API.Recipe
 {
     [ApiController]
     [Route("api/recipes")]
