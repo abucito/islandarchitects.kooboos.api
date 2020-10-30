@@ -10,7 +10,7 @@ using Kooboos.API.Contexts;
 using Kooboos.API.Ingredients;
 using Kooboos.API.Recipe;
 using Kooboos.API.Units;
-using Kooboos.API.IngredientsList;
+using Kooboos.API.IngredientsLists;
 
 namespace Kooboos.API
 {

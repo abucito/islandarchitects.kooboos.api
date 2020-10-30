@@ -1,6 +1,7 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Kooboos.API.IngredientsList
+namespace Kooboos.API.IngredientsLists
 {
     [ApiController]
     [Route("api/recipes/{recipeId}/ingredientslist")]
@@ -8,15 +9,24 @@ namespace Kooboos.API.IngredientsList
     {
         private readonly IIngredientsListService ingredientsListService;
 
-        public IngredientsListController(IIngredientsListService ingredientsListService)
+        private readonly IMapper mapper;
+
+        public IngredientsListController(IIngredientsListService ingredientsListService, IMapper mapper)
         {
             this.ingredientsListService = ingredientsListService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult GetIngredientsList(int recipeId)
         {
-            return Ok();
+            var ingredientsListDto = ingredientsListService.GetByRecipeId(recipeId);
+            if (ingredientsListDto == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ingredientsListDto);
         }
     }
 }

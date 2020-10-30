@@ -38,5 +38,15 @@ namespace Kooboos.Tests
 
             configuration.AssertConfigurationIsValid();
         }
+
+        [Test]
+        public void Automapper_IngredientsListProfile_IsValid()
+        {
+            var configuration = new MapperConfiguration(
+                c => c.AddProfile<IngredientsListProfile>()
+            );
+
+            configuration.AssertConfigurationIsValid();
+        }
     }
 }

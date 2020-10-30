@@ -56,11 +56,36 @@ namespace Kooboos.API.Contexts
                 }
             );
 
+            modelBuilder.Entity<IngredientsList>()
+            .HasData(
+                new IngredientsList
+                {
+                    Id = 1,
+                    RecipeId = 1
+                }
+            );
+
+            modelBuilder.Entity<IngredientsListItem>()
+            .HasData(
+                new IngredientsListItem
+                {
+                    Id = 1,
+                    IngredientId = 1,
+                    Quantity = 1,
+                    UnitId = 1,
+                    IngredientsListId = 1
+                }
+            );
+
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Entities.Recipe> Recipes { get; set; }
 
         public DbSet<Ingredient> Ingredients { get; set; }
+
+        public DbSet<IngredientsList> IngredientsLists { get; set; }
+
+        public DbSet<IngredientsListItem> IngredientsListItems { get; set; }
     }
 }

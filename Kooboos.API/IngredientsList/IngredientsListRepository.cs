@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using AutoMapper;
 using Kooboos.API.Contexts;
+using Kooboos.API.Models;
 
-namespace Kooboos.API.IngredientsList
+namespace Kooboos.API.IngredientsLists
 {
     public class IngredientsListRepository : IIngredientsListRepository
     {
@@ -14,6 +16,17 @@ namespace Kooboos.API.IngredientsList
         {
             this.recipeContext = recipeContext ?? throw new ArgumentNullException();
             this.mapper = mapper ?? throw new ArgumentNullException();
+        }
+
+        public IngredientsListDto GetByRecipeId(int recipeId)
+        {
+            var ingredientsList = recipeContext.IngredientsLists.Find(recipeId);
+            return mapper.Map<IngredientsListDto>(ingredientsList);
+        }
+
+        public ICollection<IngredientsListItemDto> GetByIngredientsListId(int ingredientsListId)
+        {
+            return new List<IngredientsListItemDto>();
         }
     }
 }
