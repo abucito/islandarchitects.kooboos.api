@@ -10,6 +10,7 @@ using Kooboos.API.Contexts;
 using Kooboos.API.Ingredients;
 using Kooboos.API.Recipe;
 using Kooboos.API.Units;
+using Kooboos.API.IngredientsList;
 
 namespace Kooboos.API
 {
@@ -37,6 +38,9 @@ namespace Kooboos.API
 
             services.AddScoped<IUnitsRepository, UnitsRepository>();
             services.AddScoped<IUnitsService, UnitsService>();
+
+            services.AddScoped<IIngredientsListRepository, IngredientsListRepository>();
+            services.AddScoped<IIngredientsListService, IngredientsListService>();
 
             services.AddDbContext<RecipeContext>();
         }
