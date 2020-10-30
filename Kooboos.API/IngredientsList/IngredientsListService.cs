@@ -25,5 +25,10 @@ namespace Kooboos.API.IngredientsLists
 
             return ingredientsListDto;
         }
+
+        public int InsertIngredientsListItem(int recipeId, IngredientsListItemDto ingredientListItemDto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,6 @@
 using AutoMapper;
+using Kooboos.API.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kooboos.API.IngredientsLists
@@ -17,7 +19,7 @@ namespace Kooboos.API.IngredientsLists
             this.mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetIngredientsList")]
         public IActionResult GetIngredientsList(int recipeId)
         {
             var ingredientsListDto = ingredientsListService.GetByRecipeId(recipeId);
@@ -27,6 +29,36 @@ namespace Kooboos.API.IngredientsLists
             }
 
             return Ok(ingredientsListDto);
+        }
+
+        [HttpPost]
+        [Route("/item")]
+        public IActionResult AddIngredientsListItem(
+            int recipeId,
+            [FromBody] IngredientsListItemForCreationDto ingredientListItemForCreationDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var ingredientsListDto = ingredientsListService.GetByRecipeId(recipeId);
+            if (ingredientsListDto == null)
+            {
+                return NotFound();
+            }
+            var ingredientListItemDto = mapper.Map<IngredientsListItemDto>(ingredientListItemForCreationDto);
+
+            var idOfNewIngredientsListItem = ingredientsListService.InsertIngredientsListItem(recipeId, ingredientListItemDto);
+
+            if (idOfNewIngredientsListItem > 0)
+            {
+                return CreatedAtRoute("GetIngredientsList", new { recipeId = recipeId }, ingredientListItemDto);
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
     }
 }
