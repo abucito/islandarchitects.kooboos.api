@@ -43,7 +43,13 @@ namespace Kooboos.API.Contexts
                     {
                         Id = 1,
                         Name = "Black Pepper",
-                        Description = "Spice up your life!"
+                        Description = "Spice up your life"
+                    },
+                    new Ingredient
+                    {
+                        Id = 2,
+                        Name = "Hot Chili",
+                        Description = "For those who like it hot"
                     }
                 );
 
@@ -53,6 +59,11 @@ namespace Kooboos.API.Contexts
                 {
                     Id = 1,
                     Name = "Spoon"
+                },
+                new Unit
+                {
+                    Id = 2,
+                    Name = "Dash"
                 }
             );
 
@@ -73,6 +84,14 @@ namespace Kooboos.API.Contexts
                     IngredientId = 1,
                     Quantity = 1,
                     UnitId = 1,
+                    IngredientsListId = 1
+                },
+                new IngredientsListItem
+                {
+                    Id = 2,
+                    IngredientId = 2,
+                    Quantity = 5,
+                    UnitId = 2,
                     IngredientsListId = 1
                 }
             );
