@@ -7,5 +7,9 @@ namespace Kooboos.API.IngredientsLists
     {
         IngredientsListDto GetByRecipeId(int recipeId);
         ICollection<IngredientsListItemDto> GetByIngredientsListId(int ingredientsListId);
+        int InsertIngredientsListItem(int recipeId, IngredientsListItemDto ingredientListItemDto);
+        bool RecipeExits(int recipeId);
+        bool IngredientExists(int ingredientId);
+        bool UnitExists(int unitId);
     }
 }

@@ -78,14 +78,58 @@ namespace Kooboos.Tests
         }
 
         [Test]
+        public void AddIngredientsListItem_InvalidUnitId_ReturnsBadRequestResult()
+        {
+            // Arrange
+            int validRecipeId = 1;
+            int invalidUnitId = 5;
+            ingredientsListServiceMock = new Mock<IIngredientsListService>();
+            ingredientsListServiceMock
+                .Setup(m => m.UnitExists(invalidUnitId))
+                .Returns(false);
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object, mapper);
+
+            // Act
+            var result = ingredientsListController.AddIngredientsListItem(validRecipeId, new IngredientsListItemForCreationDto() { UnitId = invalidUnitId });
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(BadRequestObjectResult));
+        }
+
+        [Test]
+        public void AddIngredientsListItem_InvalidIngredientId_ReturnsBadRequestResult()
+        {
+            // Arrange
+            int validRecipeId = 1;
+            int invalidIngredientId = 5;
+            ingredientsListServiceMock = new Mock<IIngredientsListService>();
+            ingredientsListServiceMock
+                .Setup(m => m.IngredientExists(invalidIngredientId))
+                .Returns(false);
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object, mapper);
+
+            // Act
+            var result = ingredientsListController.AddIngredientsListItem(validRecipeId, new IngredientsListItemForCreationDto() { IngredientId = invalidIngredientId });
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(BadRequestObjectResult));
+        }
+
+        [Test]
         public void AddIngredientsListItem_ValidInput_ReturnsCreatedResult()
         {
             // Arrange
             int validRecipeId = 1;
             ingredientsListServiceMock = new Mock<IIngredientsListService>();
             ingredientsListServiceMock
-                .Setup(m => m.GetByRecipeId(validRecipeId))
-                .Returns(new IngredientsListDto());
+                .Setup(m => m.RecipeExists(validRecipeId))
+                .Returns(true);
+            ingredientsListServiceMock
+                .Setup(m => m.UnitExists(It.IsAny<int>()))
+                .Returns(true);
+            ingredientsListServiceMock
+                .Setup(m => m.IngredientExists(It.IsAny<int>()))
+                .Returns(true);
             ingredientsListServiceMock
                 .Setup(m => m.InsertIngredientsListItem(validRecipeId, It.IsAny<IngredientsListItemDto>()))
                 .Returns(1);
@@ -105,8 +149,14 @@ namespace Kooboos.Tests
             int invalidRecipeId = 2;
             ingredientsListServiceMock = new Mock<IIngredientsListService>();
             ingredientsListServiceMock
-                .Setup(m => m.GetByRecipeId(invalidRecipeId))
-                .Returns(null as IngredientsListDto);
+                .Setup(m => m.RecipeExists(invalidRecipeId))
+                .Returns(false);
+            ingredientsListServiceMock
+                .Setup(m => m.UnitExists(It.IsAny<int>()))
+                .Returns(true);
+            ingredientsListServiceMock
+                .Setup(m => m.IngredientExists(It.IsAny<int>()))
+                .Returns(true);
             ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object, mapper);
 
             // Act
@@ -114,6 +164,7 @@ namespace Kooboos.Tests
 
             // Assert
             Assert.IsTrue(result.GetType() == typeof(NotFoundResult));
+
         }
     }
 }

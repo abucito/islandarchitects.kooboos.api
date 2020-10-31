@@ -5,6 +5,7 @@ using AutoMapper;
 using Kooboos.API.Contexts;
 using Kooboos.API.Models;
 using Microsoft.EntityFrameworkCore;
+using Kooboos.API.Entities;
 
 namespace Kooboos.API.IngredientsLists
 {
@@ -22,7 +23,7 @@ namespace Kooboos.API.IngredientsLists
 
         public IngredientsListDto GetByRecipeId(int recipeId)
         {
-            var ingredientsList = recipeContext.IngredientsLists.Find(recipeId);
+            var ingredientsList = recipeContext.IngredientsLists.SingleOrDefault(il => il.RecipeId == recipeId);
             return mapper.Map<IngredientsListDto>(ingredientsList);
         }
 
@@ -35,6 +36,40 @@ namespace Kooboos.API.IngredientsLists
                 .ToList();
 
             return ingredientsListItems.Select(i => mapper.Map<IngredientsListItemDto>(i)).ToList();
+        }
+
+        public int InsertIngredientsListItem(int recipeId, IngredientsListItemDto ingredientsListItemDto)
+        {
+            var ingredientsList = recipeContext.IngredientsLists.SingleOrDefault(il => il.RecipeId == recipeId);
+            if (ingredientsList == null)
+            {
+                ingredientsList = new IngredientsList
+                {
+                    RecipeId = recipeId
+                };
+                recipeContext.Add(ingredientsList);
+            }
+
+            var ingredientsListItem = mapper.Map<IngredientsListItem>(ingredientsListItemDto);
+            ingredientsListItem.IngredientsList = ingredientsList;
+            recipeContext.Add(ingredientsListItem);
+            recipeContext.SaveChanges();
+            return ingredientsListItem.Id;
+        }
+
+        public bool RecipeExits(int recipeId)
+        {
+            return recipeContext.Recipes.Find(recipeId) != null;
+        }
+
+        public bool IngredientExists(int ingredientId)
+        {
+            return recipeContext.Ingredients.Find(ingredientId) != null;
+        }
+
+        public bool UnitExists(int unitId)
+        {
+            return recipeContext.Units.Find(unitId) != null;
         }
     }
 }

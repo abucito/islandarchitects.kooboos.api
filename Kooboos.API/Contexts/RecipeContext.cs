@@ -103,6 +103,8 @@ namespace Kooboos.API.Contexts
 
         public DbSet<Ingredient> Ingredients { get; set; }
 
+        public DbSet<Unit> Units { get; set; }
+
         public DbSet<IngredientsList> IngredientsLists { get; set; }
 
         public DbSet<IngredientsListItem> IngredientsListItems { get; set; }

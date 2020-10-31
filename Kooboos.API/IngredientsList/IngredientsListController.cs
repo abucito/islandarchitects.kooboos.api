@@ -37,13 +37,15 @@ namespace Kooboos.API.IngredientsLists
             int recipeId,
             [FromBody] IngredientsListItemForCreationDto ingredientListItemForCreationDto)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid
+                    || !ingredientsListService.UnitExists(ingredientListItemForCreationDto.UnitId)
+                    || !ingredientsListService.IngredientExists(ingredientListItemForCreationDto.IngredientId))
             {
                 return BadRequest(ModelState);
             }
 
             var ingredientsListDto = ingredientsListService.GetByRecipeId(recipeId);
-            if (ingredientsListDto == null)
+            if (!ingredientsListService.RecipeExists(recipeId))
             {
                 return NotFound();
             }

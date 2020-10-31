@@ -28,7 +28,22 @@ namespace Kooboos.API.IngredientsLists
 
         public int InsertIngredientsListItem(int recipeId, IngredientsListItemDto ingredientListItemDto)
         {
-            throw new NotImplementedException();
+            return ingredientsListRepository.InsertIngredientsListItem(recipeId, ingredientListItemDto);
+        }
+
+        public bool RecipeExists(int recipeId)
+        {
+            return ingredientsListRepository.RecipeExits(recipeId);
+        }
+
+        public bool IngredientExists(int ingredientId)
+        {
+            return ingredientsListRepository.IngredientExists(ingredientId);
+        }
+
+        public bool UnitExists(int unitId)
+        {
+            return ingredientsListRepository.UnitExists(unitId);
         }
     }
 }
