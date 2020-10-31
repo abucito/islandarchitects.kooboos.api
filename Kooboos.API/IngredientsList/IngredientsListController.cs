@@ -32,7 +32,7 @@ namespace Kooboos.API.IngredientsLists
         }
 
         [HttpPost]
-        [Route("/item")]
+        [Route("item")]
         public IActionResult AddIngredientsListItem(
             int recipeId,
             [FromBody] IngredientsListItemForCreationDto ingredientListItemForCreationDto)
@@ -44,7 +44,6 @@ namespace Kooboos.API.IngredientsLists
                 return BadRequest(ModelState);
             }
 
-            var ingredientsListDto = ingredientsListService.GetByRecipeId(recipeId);
             if (!ingredientsListService.RecipeExists(recipeId))
             {
                 return NotFound();
