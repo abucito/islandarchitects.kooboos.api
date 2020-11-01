@@ -19,6 +19,7 @@ namespace Kooboos.API.AutomapperProfiles
                 .ForMember(dest => dest.Ingredient, opts => opts.Ignore())
                 .ForMember(dest => dest.Id, opts => opts.Ignore());
             CreateMap<IngredientsListItemForCreationDto, IngredientsListItemDto>()
+                .ForMember(dest => dest.Id, opts => opts.Ignore())
                 .ForMember(dest => dest.IngredientName, opts => opts.Ignore())
                 .ForMember(dest => dest.UnitName, opts => opts.Ignore());
         }
