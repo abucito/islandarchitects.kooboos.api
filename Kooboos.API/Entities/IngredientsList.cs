@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,5 +14,7 @@ namespace Kooboos.API.Entities
         public Recipe Recipe { get; set; }
 
         public int RecipeId { get; set; }
+
+        public ICollection<IngredientsListItem> IngredientsListItems { get; set; } = new List<IngredientsListItem>();
     }
 }

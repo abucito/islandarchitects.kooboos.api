@@ -3,14 +3,16 @@ using Kooboos.API.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Kooboos.API.Migrations
 {
     [DbContext(typeof(RecipeContext))]
-    partial class RecipeContextModelSnapshot : ModelSnapshot
+    [Migration("20201030091121_Add IngredientsList and IngredientsListItem")]
+    partial class AddIngredientsListandIngredientsListItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,14 +43,8 @@ namespace Kooboos.API.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "Spice up your life",
+                            Description = "Spice up your life!",
                             Name = "Black Pepper"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "For those who like it hot",
-                            Name = "Hot Chili"
                         });
                 });
 
@@ -114,14 +110,6 @@ namespace Kooboos.API.Migrations
                             IngredientsListId = 1,
                             Quantity = 1f,
                             UnitId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IngredientId = 2,
-                            IngredientsListId = 1,
-                            Quantity = 5f,
-                            UnitId = 2
                         });
                 });
 
@@ -167,18 +155,13 @@ namespace Kooboos.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Units");
+                    b.ToTable("Unit");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             Name = "Spoon"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Dash"
                         });
                 });
 
