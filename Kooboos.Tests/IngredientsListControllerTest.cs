@@ -15,13 +15,10 @@ namespace Kooboos.Tests
 
         private Mock<IIngredientsListService> ingredientsListServiceMock;
 
-        private IMapper mapper;
-
         [OneTimeSetUp]
         public void OneTimeSetup()
         {
             var mapperConfiguration = new MapperConfiguration(c => c.AddProfile<IngredientsListProfile>());
-            mapper = mapperConfiguration.CreateMapper();
         }
 
         [Test]
@@ -33,7 +30,7 @@ namespace Kooboos.Tests
             ingredientsListServiceMock
                 .Setup(m => m.GetByRecipeId(validRecipeId))
                 .Returns(new IngredientsListDto());
-            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object, mapper);
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object);
 
             // Act
             var result = ingredientsListController.GetIngredientsList(validRecipeId);
@@ -51,7 +48,7 @@ namespace Kooboos.Tests
             ingredientsListServiceMock
                 .Setup(m => m.GetByRecipeId(invalidRecipeId))
                 .Returns(null as IngredientsListDto);
-            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object, mapper);
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object);
 
             // Act
             var result = ingredientsListController.GetIngredientsList(invalidRecipeId);
@@ -66,7 +63,7 @@ namespace Kooboos.Tests
         {
             // Arrange
             ingredientsListServiceMock = new Mock<IIngredientsListService>();
-            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object, mapper);
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object);
             ingredientsListController.ModelState.AddModelError("Some Key", "Some Error Message");
             int validRecipeId = 1;
 
@@ -87,7 +84,7 @@ namespace Kooboos.Tests
             ingredientsListServiceMock
                 .Setup(m => m.UnitExists(invalidUnitId))
                 .Returns(false);
-            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object, mapper);
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object);
 
             // Act
             var result = ingredientsListController.AddIngredientsListItem(validRecipeId, new IngredientsListItemForCreationDto() { UnitId = invalidUnitId });
@@ -106,7 +103,7 @@ namespace Kooboos.Tests
             ingredientsListServiceMock
                 .Setup(m => m.IngredientExists(invalidIngredientId))
                 .Returns(false);
-            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object, mapper);
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object);
 
             // Act
             var result = ingredientsListController.AddIngredientsListItem(validRecipeId, new IngredientsListItemForCreationDto() { IngredientId = invalidIngredientId });
@@ -131,9 +128,9 @@ namespace Kooboos.Tests
                 .Setup(m => m.IngredientExists(It.IsAny<int>()))
                 .Returns(true);
             ingredientsListServiceMock
-                .Setup(m => m.InsertIngredientsListItem(validRecipeId, It.IsAny<IngredientsListItemDto>()))
+                .Setup(m => m.InsertIngredientsListItem(validRecipeId, It.IsAny<IngredientsListItemForCreationDto>()))
                 .Returns(1);
-            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object, mapper);
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object);
 
             // Act
             var result = ingredientsListController.AddIngredientsListItem(validRecipeId, new IngredientsListItemForCreationDto());
@@ -157,7 +154,7 @@ namespace Kooboos.Tests
             ingredientsListServiceMock
                 .Setup(m => m.IngredientExists(It.IsAny<int>()))
                 .Returns(true);
-            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object, mapper);
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object);
 
             // Act
             var result = ingredientsListController.AddIngredientsListItem(invalidRecipeId, new IngredientsListItemForCreationDto());
@@ -177,7 +174,7 @@ namespace Kooboos.Tests
                 .Setup(m => m.IngredientsListItemExists(validIngredientsListItemId))
                 .Returns(true);
 
-            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object, mapper);
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object);
 
             // Act
             var result = ingredientsListController.DeleteIngredientsListItem(recipeId, validIngredientsListItemId);
@@ -197,7 +194,7 @@ namespace Kooboos.Tests
                 .Setup(m => m.IngredientsListItemExists(invalidIngredientsListItemId))
                 .Returns(false);
 
-            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object, mapper);
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object);
 
             // Act
             var result = ingredientsListController.DeleteIngredientsListItem(recipeId, invalidIngredientsListItemId);

@@ -11,12 +11,9 @@ namespace Kooboos.API.IngredientsLists
     {
         private readonly IIngredientsListService ingredientsListService;
 
-        private readonly IMapper mapper;
-
-        public IngredientsListController(IIngredientsListService ingredientsListService, IMapper mapper)
+        public IngredientsListController(IIngredientsListService ingredientsListService)
         {
             this.ingredientsListService = ingredientsListService;
-            this.mapper = mapper;
         }
 
         [HttpGet(Name = "GetIngredientsList")]
@@ -48,13 +45,12 @@ namespace Kooboos.API.IngredientsLists
             {
                 return NotFound();
             }
-            var ingredientListItemDto = mapper.Map<IngredientsListItemDto>(ingredientListItemForCreationDto);
 
-            var idOfNewIngredientsListItem = ingredientsListService.InsertIngredientsListItem(recipeId, ingredientListItemDto);
+            var idOfNewIngredientsListItem = ingredientsListService.InsertIngredientsListItem(recipeId, ingredientListItemForCreationDto);
 
             if (idOfNewIngredientsListItem > 0)
             {
-                return CreatedAtRoute("GetIngredientsList", new { recipeId = recipeId }, ingredientListItemDto);
+                return CreatedAtRoute("GetIngredientsList", new { recipeId = recipeId }, ingredientListItemForCreationDto);
             }
             else
             {
@@ -75,6 +71,5 @@ namespace Kooboos.API.IngredientsLists
 
             return NoContent();
         }
-
     }
 }

@@ -5,7 +5,7 @@ namespace Kooboos.API.IngredientsLists
     public interface IIngredientsListService
     {
         IngredientsListDto GetByRecipeId(int recipeId);
-        int InsertIngredientsListItem(int recipeId, IngredientsListItemDto ingredientListItemDto);
+        int InsertIngredientsListItem(int recipeId, IngredientsListItemForCreationDto ingredientListItemForCreationDto);
         bool RecipeExists(int recipeId);
         bool IngredientExists(int ingredientId);
         bool UnitExists(int unitId);

@@ -38,7 +38,7 @@ namespace Kooboos.API.IngredientsLists
             return ingredientsListItems.Select(i => mapper.Map<IngredientsListItemDto>(i)).ToList();
         }
 
-        public int InsertIngredientsListItem(int recipeId, IngredientsListItemDto ingredientsListItemDto)
+        public int InsertIngredientsListItem(int recipeId, IngredientsListItemForCreationDto ingredientListItemForCreationDto)
         {
             var ingredientsList = recipeContext.IngredientsLists.SingleOrDefault(il => il.RecipeId == recipeId);
             if (ingredientsList == null)
@@ -50,7 +50,7 @@ namespace Kooboos.API.IngredientsLists
                 recipeContext.Add(ingredientsList);
             }
 
-            var ingredientsListItem = mapper.Map<IngredientsListItem>(ingredientsListItemDto);
+            var ingredientsListItem = mapper.Map<IngredientsListItem>(ingredientListItemForCreationDto);
             ingredientsListItem.IngredientsList = ingredientsList;
             recipeContext.Add(ingredientsListItem);
             recipeContext.SaveChanges();
