@@ -164,7 +164,46 @@ namespace Kooboos.Tests
 
             // Assert
             Assert.IsTrue(result.GetType() == typeof(NotFoundResult));
+        }
 
+        [Test]
+        public void DeleteIngredient_ValidId_ReturnsNoContent()
+        {
+            // Arrange
+            int recipeId = 1;
+            int validIngredientsListItemId = 1;
+            ingredientsListServiceMock = new Mock<IIngredientsListService>();
+            ingredientsListServiceMock
+                .Setup(m => m.IngredientsListItemExists(validIngredientsListItemId))
+                .Returns(true);
+
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object, mapper);
+
+            // Act
+            var result = ingredientsListController.DeleteIngredientsListItem(recipeId, validIngredientsListItemId);
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(NoContentResult));
+        }
+
+        [Test]
+        public void DeleteIngredient_InvalidId_ReturnsNotFound()
+        {
+            // Arrange
+            int recipeId = 1;
+            int invalidIngredientsListItemId = 2;
+            ingredientsListServiceMock = new Mock<IIngredientsListService>();
+            ingredientsListServiceMock
+                .Setup(m => m.IngredientsListItemExists(invalidIngredientsListItemId))
+                .Returns(false);
+
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object, mapper);
+
+            // Act
+            var result = ingredientsListController.DeleteIngredientsListItem(recipeId, invalidIngredientsListItemId);
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(NotFoundResult));
         }
     }
 }

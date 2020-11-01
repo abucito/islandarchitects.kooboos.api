@@ -61,5 +61,20 @@ namespace Kooboos.API.IngredientsLists
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [HttpDelete]
+        [Route("item/{itemId}")]
+        public IActionResult DeleteIngredientsListItem(int recipeId, int itemId)
+        {
+            if (!ingredientsListService.IngredientsListItemExists(itemId))
+            {
+                return NotFound();
+            }
+
+            ingredientsListService.DeleteIngredientsListItem(itemId);
+
+            return NoContent();
+        }
+
     }
 }

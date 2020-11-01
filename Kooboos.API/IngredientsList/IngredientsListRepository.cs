@@ -71,5 +71,21 @@ namespace Kooboos.API.IngredientsLists
         {
             return recipeContext.Units.Find(unitId) != null;
         }
+
+        public bool IngredientsListItemExists(int itemId)
+        {
+            return recipeContext.IngredientsListItems.Find(itemId) != null;
+        }
+
+        public void DeleteIngredientsListItem(int itemId)
+        {
+            var entityToRemove = recipeContext.IngredientsListItems.Find(itemId);
+            if (entityToRemove != null)
+            {
+                recipeContext.Remove(entityToRemove);
+            }
+
+            recipeContext.SaveChanges();
+        }
     }
 }

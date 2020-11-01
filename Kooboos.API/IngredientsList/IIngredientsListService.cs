@@ -9,5 +9,7 @@ namespace Kooboos.API.IngredientsLists
         bool RecipeExists(int recipeId);
         bool IngredientExists(int ingredientId);
         bool UnitExists(int unitId);
+        bool IngredientsListItemExists(int itemId);
+        void DeleteIngredientsListItem(int itemId);
     }
 }

@@ -45,5 +45,15 @@ namespace Kooboos.API.IngredientsLists
         {
             return ingredientsListRepository.UnitExists(unitId);
         }
+
+        public bool IngredientsListItemExists(int itemId)
+        {
+            return ingredientsListRepository.IngredientsListItemExists(itemId);
+        }
+
+        public void DeleteIngredientsListItem(int itemId)
+        {
+            ingredientsListRepository.DeleteIngredientsListItem(itemId);
+        }
     }
 }
