@@ -1,6 +1,5 @@
 using System;
-using System.Linq;
-using Kooboos.API.Models;
+using Kooboos.API.IngredientsLists.Models;
 
 namespace Kooboos.API.IngredientsLists
 {

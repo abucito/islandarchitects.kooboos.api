@@ -2,9 +2,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
-using Kooboos.API.AutomapperProfiles;
-using Kooboos.API.Models;
+using Kooboos.API.IngredientsLists.AutomapperProfile;
 using Kooboos.API.IngredientsLists;
+using Kooboos.API.IngredientsLists.Models;
 
 namespace Kooboos.Tests
 {

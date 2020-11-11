@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Kooboos.API.Base;
+using Kooboos.API.Recipes.Entities;
 
-namespace Kooboos.API.Entities
+namespace Kooboos.API.IngredientsLists.Entities
 {
     public class IngredientsList : IEntityBase
     {

@@ -3,9 +3,9 @@ using System.Linq;
 using System.Collections.Generic;
 using AutoMapper;
 using Kooboos.API.Contexts;
-using Kooboos.API.Models;
 using Microsoft.EntityFrameworkCore;
-using Kooboos.API.Entities;
+using Kooboos.API.IngredientsLists.Models;
+using Kooboos.API.IngredientsLists.Entities;
 
 namespace Kooboos.API.IngredientsLists
 {

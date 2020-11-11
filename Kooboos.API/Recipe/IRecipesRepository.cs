@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Kooboos.API.Models;
+using Kooboos.API.Recipes.Models;
 
-namespace Kooboos.API.Recipe
+namespace Kooboos.API.Recipes
 {
     public interface IRecipesRepository
     {

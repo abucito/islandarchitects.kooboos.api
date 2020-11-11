@@ -1,9 +1,10 @@
 using System;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Kooboos.API.Entities;
+using Kooboos.API.Recipes.Entities;
+using Kooboos.API.Ingredients.Entities;
+using Kooboos.API.Units.Entities;
+using Kooboos.API.IngredientsLists.Entities;
 
 namespace Kooboos.API.Contexts
 {
@@ -27,9 +28,9 @@ namespace Kooboos.API.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Entities.Recipe>()
+            modelBuilder.Entity<Recipe>()
                 .HasData(
-                    new Entities.Recipe
+                    new Recipe
                     {
                         Id = 1,
                         Title = "WTF Recipe",
@@ -99,7 +100,7 @@ namespace Kooboos.API.Contexts
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<Entities.Recipe> Recipes { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
 
         public DbSet<Ingredient> Ingredients { get; set; }
 

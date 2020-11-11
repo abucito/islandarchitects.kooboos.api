@@ -4,10 +4,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
-using Kooboos.API;
-using Kooboos.API.AutomapperProfiles;
-using Kooboos.API.Models;
-using Kooboos.API.Recipe;
+using Kooboos.API.Recipes.AutomapperProfile;
+using Kooboos.API.Recipes;
+using Kooboos.API.Recipes.Models;
 
 namespace Kooboos.Tests
 {

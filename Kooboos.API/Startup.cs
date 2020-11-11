@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Kooboos.API.Contexts;
 using Kooboos.API.Ingredients;
-using Kooboos.API.Recipe;
+using Kooboos.API.Recipes;
 using Kooboos.API.Units;
 using Kooboos.API.IngredientsLists;
 

@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Kooboos.API.Base;
 
-namespace Kooboos.API.Entities
+namespace Kooboos.API.Units.Entities
 {
     public class Unit : IEntityBase
     {

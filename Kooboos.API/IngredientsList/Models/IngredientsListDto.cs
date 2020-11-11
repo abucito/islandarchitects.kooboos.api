@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Kooboos.API.Models
+namespace Kooboos.API.IngredientsLists.Models
 {
     public class IngredientsListDto
     {

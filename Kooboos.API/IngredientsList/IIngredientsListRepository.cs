@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Kooboos.API.Models;
+using Kooboos.API.IngredientsLists.Models;
 
 namespace Kooboos.API.IngredientsLists
 {

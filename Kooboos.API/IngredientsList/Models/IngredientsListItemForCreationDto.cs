@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Kooboos.API.Models
+namespace Kooboos.API.IngredientsLists.Models
 {
     public class IngredientsListItemForCreationDto
     {

@@ -1,8 +1,9 @@
-using System.Linq;
 using AutoMapper;
 using NUnit.Framework;
-using Kooboos.API.AutomapperProfiles;
-using Kooboos.API.Models;
+using Kooboos.API.Units.AutomapperProfile;
+using Kooboos.API.Ingredients.AutomapperProfile;
+using Kooboos.API.IngredientsLists.AutomapperProfile;
+using Kooboos.API.Recipes.AutomapperProfile;
 
 namespace Kooboos.Tests
 {

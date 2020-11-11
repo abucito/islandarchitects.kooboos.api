@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Kooboos.API.Base;
 
-namespace Kooboos.API.Entities
+namespace Kooboos.API.Ingredients.Entities
 {
     public class Ingredient : IEntityBase
     {
