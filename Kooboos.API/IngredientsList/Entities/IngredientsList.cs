@@ -12,9 +12,13 @@ namespace Kooboos.API.IngredientsLists.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [StringLength(50)]
+        public string Title { get; set; }
+
         [ForeignKey("RecipeId")]
         public Recipe Recipe { get; set; }
 
+        [Required]
         public int RecipeId { get; set; }
 
         public ICollection<IngredientsListItem> IngredientsListItems { get; set; } = new List<IngredientsListItem>();
