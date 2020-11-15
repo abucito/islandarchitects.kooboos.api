@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Kooboos.API.Entities
+namespace Kooboos.API.Base
 {
     public interface IEntityBase
     {

@@ -1,8 +1,8 @@
 using AutoMapper;
-using Kooboos.API.Entities;
-using Kooboos.API.Models;
+using Kooboos.API.IngredientsLists.Entities;
+using Kooboos.API.IngredientsLists.Models;
 
-namespace Kooboos.API.AutomapperProfiles
+namespace Kooboos.API.IngredientsLists.AutomapperProfile
 {
     public class IngredientsListProfile : Profile
     {

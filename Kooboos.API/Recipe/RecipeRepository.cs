@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using Kooboos.API.Contexts;
-using Kooboos.API.Models;
 using System.Linq;
 using AutoMapper;
+using Kooboos.API.Recipes.Models;
 
-namespace Kooboos.API.Recipe
+namespace Kooboos.API.Recipes
 {
     public class RecipeRepository : IRecipesRepository
     {

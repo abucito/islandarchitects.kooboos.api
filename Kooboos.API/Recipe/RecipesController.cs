@@ -1,10 +1,10 @@
 using System;
 using AutoMapper;
+using Kooboos.API.Recipes.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Kooboos.API.Models;
 
-namespace Kooboos.API.Recipe
+namespace Kooboos.API.Recipes
 {
     [ApiController]
     [Route("api/recipes")]

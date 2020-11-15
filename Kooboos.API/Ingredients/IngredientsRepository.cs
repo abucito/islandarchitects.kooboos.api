@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using Kooboos.API.Base;
 using Kooboos.API.Contexts;
-using Kooboos.API.Entities;
-using Kooboos.API.Models;
+using Kooboos.API.Ingredients.Entities;
+using Kooboos.API.Ingredients.Models;
 
 namespace Kooboos.API.Ingredients
 {

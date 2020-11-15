@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Kooboos.API.Contexts;
-using Kooboos.API.Entities;
-using Kooboos.API.Models;
 
 namespace Kooboos.API.Base
 {

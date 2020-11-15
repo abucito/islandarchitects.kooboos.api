@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Kooboos.API.Models
+namespace Kooboos.API.Recipes.Models
 {
     public class RecipeDto
     {

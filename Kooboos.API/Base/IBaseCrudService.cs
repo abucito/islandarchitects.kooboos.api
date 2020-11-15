@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Kooboos.API.Entities;
-using Kooboos.API.Models;
 
 namespace Kooboos.API.Base
 {

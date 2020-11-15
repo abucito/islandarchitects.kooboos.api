@@ -1,8 +1,8 @@
 using AutoMapper;
-using Kooboos.API.Entities;
-using Kooboos.API.Models;
+using Kooboos.API.Units.Entities;
+using Kooboos.API.Units.Models;
 
-namespace Kooboos.API.AutomapperProfiles
+namespace Kooboos.API.Units.AutomapperProfile
 {
     public class UnitProfile : Profile
     {

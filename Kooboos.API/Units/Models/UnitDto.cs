@@ -1,4 +1,4 @@
-namespace Kooboos.API.Models
+namespace Kooboos.API.Units.Models
 {
     public class UnitDto
     {

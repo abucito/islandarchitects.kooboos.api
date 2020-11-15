@@ -2,7 +2,7 @@ using System;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Kooboos.API.Models;
+using Kooboos.API.Ingredients.Models;
 
 namespace Kooboos.API.Ingredients
 {

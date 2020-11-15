@@ -1,5 +1,4 @@
-using AutoMapper;
-using Kooboos.API.Models;
+using Kooboos.API.IngredientsLists.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
