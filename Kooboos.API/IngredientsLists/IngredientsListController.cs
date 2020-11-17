@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Kooboos.API.IngredientsLists
 {
     [ApiController]
-    [Route("api/recipes/{recipeId}/ingredientslist")]
+    [Route("api/recipes/{recipeId}/ingredientslists")]
     public class IngredientsListController : ControllerBase
     {
         private readonly IIngredientsListService ingredientsListService;
@@ -18,16 +18,17 @@ namespace Kooboos.API.IngredientsLists
         [HttpGet(Name = "GetIngredientsList")]
         public IActionResult GetIngredientsList(int recipeId)
         {
-            var ingredientsListDto = ingredientsListService.GetByRecipeId(recipeId);
-            if (ingredientsListDto == null)
+            var ingredientsListDtos = ingredientsListService.GetByRecipeId(recipeId);
+            if (ingredientsListDtos == null)
             {
                 return NotFound();
             }
 
-            return Ok(ingredientsListDto);
+            return Ok(ingredientsListDtos);
         }
 
         [HttpPost]
+        [Route("")]
         public IActionResult AddIngredientsList(
             int recipeId,
             [FromBody] IngredientsListForCreationDto ingredientsListForCreationDto

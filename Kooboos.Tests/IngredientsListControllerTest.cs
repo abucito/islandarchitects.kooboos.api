@@ -5,6 +5,7 @@ using NUnit.Framework;
 using Kooboos.API.IngredientsLists.AutomapperProfile;
 using Kooboos.API.IngredientsLists;
 using Kooboos.API.IngredientsLists.Models;
+using System.Collections.Generic;
 
 namespace Kooboos.Tests
 {
@@ -29,7 +30,7 @@ namespace Kooboos.Tests
             ingredientsListServiceMock = new Mock<IIngredientsListService>();
             ingredientsListServiceMock
                 .Setup(m => m.GetByRecipeId(validRecipeId))
-                .Returns(new IngredientsListDto());
+                .Returns(new System.Collections.Generic.List<IngredientsListDto>(new[] { new IngredientsListDto() }));
             ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object);
 
             // Act
@@ -47,7 +48,7 @@ namespace Kooboos.Tests
             ingredientsListServiceMock = new Mock<IIngredientsListService>();
             ingredientsListServiceMock
                 .Setup(m => m.GetByRecipeId(invalidRecipeId))
-                .Returns(null as IngredientsListDto);
+                .Returns(null as ICollection<IngredientsListDto>);
             ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object);
 
             // Act

@@ -5,7 +5,7 @@ namespace Kooboos.API.IngredientsLists
 {
     public interface IIngredientsListRepository
     {
-        IngredientsListDto GetByRecipeId(int recipeId);
+        ICollection<IngredientsListDto> GetByRecipeId(int recipeId);
         ICollection<IngredientsListItemDto> GetByIngredientsListId(int ingredientsListId);
         int InsertIngredientsListItem(int recipeId, IngredientsListItemForCreationDto ingredientListItemForCreationDto);
         bool RecipeExits(int recipeId);

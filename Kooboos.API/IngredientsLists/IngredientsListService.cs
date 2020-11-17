@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Kooboos.API.IngredientsLists.Models;
 
 namespace Kooboos.API.IngredientsLists
@@ -12,17 +13,20 @@ namespace Kooboos.API.IngredientsLists
             this.ingredientsListRepository = ingredientsListRepository ?? throw new ArgumentNullException();
         }
 
-        public IngredientsListDto GetByRecipeId(int recipeId)
+        public ICollection<IngredientsListDto> GetByRecipeId(int recipeId)
         {
-            var ingredientsListDto = ingredientsListRepository.GetByRecipeId(recipeId);
-            var ingredientsListItemDtos = ingredientsListRepository.GetByIngredientsListId(ingredientsListDto.Id);
-
-            foreach (var ingredientsListItemDto in ingredientsListItemDtos)
+            var ingredientsListDtos = ingredientsListRepository.GetByRecipeId(recipeId);
+            foreach (var ingredientsListDto in ingredientsListDtos)
             {
-                ingredientsListDto.IngredientsListItems.Add(ingredientsListItemDto);
+                var ingredientsListItemDtos = ingredientsListRepository.GetByIngredientsListId(ingredientsListDto.Id);
+
+                foreach (var ingredientsListItemDto in ingredientsListItemDtos)
+                {
+                    ingredientsListDto.IngredientsListItems.Add(ingredientsListItemDto);
+                }
             }
 
-            return ingredientsListDto;
+            return ingredientsListDtos;
         }
 
         public int InsertIngredientsList(int recipeId, IngredientsListForCreationDto ingredientsListForCreationDto)

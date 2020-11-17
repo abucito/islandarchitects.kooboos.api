@@ -10,7 +10,9 @@ namespace Kooboos.API.Recipes.AutomapperProfile
             IMappingExpression<RecipeForCreationDto, RecipeDto> mappingExpression = CreateMap<RecipeForCreationDto, RecipeDto>().ForMember(r => r.Id, id => id.Ignore());
             CreateMap<RecipeForUpdateDto, RecipeDto>().ForMember(r => r.Id, id => id.Ignore());
             CreateMap<Entities.Recipe, RecipeDto>();
-            CreateMap<RecipeDto, Entities.Recipe>().ForMember(r => r.Id, id => id.Ignore()).ForMember(r => r.IngredientsList, il => il.Ignore());
+            CreateMap<RecipeDto, Entities.Recipe>()
+                .ForMember(r => r.Id, id => id.Ignore())
+                .ForMember(r => r.IngredientsLists, il => il.Ignore());
         }
     }
 }

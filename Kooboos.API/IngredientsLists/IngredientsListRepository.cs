@@ -21,10 +21,15 @@ namespace Kooboos.API.IngredientsLists
             this.mapper = mapper ?? throw new ArgumentNullException();
         }
 
-        public IngredientsListDto GetByRecipeId(int recipeId)
+        public ICollection<IngredientsListDto> GetByRecipeId(int recipeId)
         {
-            var ingredientsList = recipeContext.IngredientsLists.SingleOrDefault(il => il.RecipeId == recipeId);
-            return mapper.Map<IngredientsListDto>(ingredientsList);
+            var ingredientsLists = recipeContext.IngredientsLists.Where(il => il.RecipeId == recipeId);
+            var ingredientsListDtos = new List<IngredientsListDto>();
+            foreach (var ingredientsList in ingredientsLists)
+            {
+                ingredientsListDtos.Add(mapper.Map<IngredientsListDto>(ingredientsList));
+            }
+            return ingredientsListDtos;
         }
 
         public ICollection<IngredientsListItemDto> GetByIngredientsListId(int ingredientsListId)

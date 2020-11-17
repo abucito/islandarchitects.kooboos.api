@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using Kooboos.API.IngredientsLists.Models;
 
 namespace Kooboos.API.IngredientsLists
 {
     public interface IIngredientsListService
     {
-        IngredientsListDto GetByRecipeId(int recipeId);
+        ICollection<IngredientsListDto> GetByRecipeId(int recipeId);
         int InsertIngredientsList(int recipeId, IngredientsListForCreationDto ingredientsListForCreationDto);
         int InsertIngredientsListItem(int recipeId, IngredientsListItemForCreationDto ingredientListItemForCreationDto);
         bool RecipeExists(int recipeId);
