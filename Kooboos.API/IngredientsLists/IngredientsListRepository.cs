@@ -38,16 +38,20 @@ namespace Kooboos.API.IngredientsLists
             return ingredientsListItems.Select(i => mapper.Map<IngredientsListItemDto>(i)).ToList();
         }
 
+        public int InsertIngredientsList(int recipeId, IngredientsListForCreationDto ingredientsListForCreationDto)
+        {
+            var ingredientsList = CreateIngredientList(recipeId);
+            mapper.Map(ingredientsListForCreationDto, ingredientsList);
+            recipeContext.SaveChanges();
+            return ingredientsList.Id;
+        }
+
         public int InsertIngredientsListItem(int recipeId, IngredientsListItemForCreationDto ingredientListItemForCreationDto)
         {
             var ingredientsList = recipeContext.IngredientsLists.SingleOrDefault(il => il.RecipeId == recipeId);
             if (ingredientsList == null)
             {
-                ingredientsList = new IngredientsList
-                {
-                    RecipeId = recipeId
-                };
-                recipeContext.Add(ingredientsList);
+                ingredientsList = CreateIngredientList(recipeId);
             }
 
             var ingredientsListItem = mapper.Map<IngredientsListItem>(ingredientListItemForCreationDto);
@@ -86,6 +90,17 @@ namespace Kooboos.API.IngredientsLists
             }
 
             recipeContext.SaveChanges();
+        }
+
+        private IngredientsList CreateIngredientList(int recipeId)
+        {
+            var ingredientsList = new IngredientsList
+            {
+                RecipeId = recipeId
+            };
+            recipeContext.Add(ingredientsList);
+
+            return ingredientsList;
         }
     }
 }

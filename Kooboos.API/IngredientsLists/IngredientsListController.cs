@@ -28,6 +28,34 @@ namespace Kooboos.API.IngredientsLists
         }
 
         [HttpPost]
+        public IActionResult AddIngredientsList(
+            int recipeId,
+            [FromBody] IngredientsListForCreationDto ingredientsListForCreationDto
+        )
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!ingredientsListService.RecipeExists(recipeId))
+            {
+                return NotFound();
+            }
+
+            var idOfNewIngredientsList = ingredientsListService.InsertIngredientsList(recipeId, ingredientsListForCreationDto);
+
+            if (idOfNewIngredientsList > 0)
+            {
+                return CreatedAtRoute("GetIngredientsList", new { recipeId = recipeId }, ingredientsListForCreationDto);
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPost]
         [Route("item")]
         public IActionResult AddIngredientsListItem(
             int recipeId,

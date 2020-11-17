@@ -6,6 +6,8 @@ namespace Kooboos.API.IngredientsLists.Models
     {
         public int Id { get; set; }
 
+        public string Title { get; set; }
+
         public int RecipeId { get; set; }
 
         public ICollection<IngredientsListItemDto> IngredientsListItems { get; set; } = new List<IngredientsListItemDto>();

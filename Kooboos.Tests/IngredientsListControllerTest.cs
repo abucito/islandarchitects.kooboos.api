@@ -57,6 +57,61 @@ namespace Kooboos.Tests
             Assert.IsTrue(result.GetType() == typeof(NotFoundResult));
         }
 
+        [Test]
+        public void AddIngredientsList_WithValidationError_ReturnsBadRequestResult()
+        {
+            // Arrange
+            ingredientsListServiceMock = new Mock<IIngredientsListService>();
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object);
+            ingredientsListController.ModelState.AddModelError("Some Key", "Some Error Message");
+            int validRecipeId = 1;
+
+            // Act
+            var result = ingredientsListController.AddIngredientsList(validRecipeId, new IngredientsListForCreationDto());
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(BadRequestObjectResult));
+        }
+
+        [Test]
+        public void AddIngredientsList_ValidInput_ReturnsCreatedResult()
+        {
+            // Arrange
+            int validRecipeId = 1;
+            ingredientsListServiceMock = new Mock<IIngredientsListService>();
+            ingredientsListServiceMock
+                .Setup(m => m.RecipeExists(validRecipeId))
+                .Returns(true);
+            ingredientsListServiceMock
+                .Setup(m => m.InsertIngredientsList(validRecipeId, It.IsAny<IngredientsListForCreationDto>()))
+                .Returns(1);
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object);
+
+            // Act
+            var result = ingredientsListController.AddIngredientsList(validRecipeId, new IngredientsListForCreationDto());
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(CreatedAtRouteResult));
+        }
+
+        [Test]
+        public void AddIngredientsList_InvalidRecipeId_ReturnsNotFoundResult()
+        {
+            // Arrange
+            int invalidRecipeId = 2;
+            ingredientsListServiceMock = new Mock<IIngredientsListService>();
+            ingredientsListServiceMock
+                .Setup(m => m.RecipeExists(invalidRecipeId))
+                .Returns(false);
+            ingredientsListController = new IngredientsListController(ingredientsListServiceMock.Object);
+
+            // Act
+            var result = ingredientsListController.AddIngredientsList(invalidRecipeId, new IngredientsListForCreationDto());
+
+            // Assert
+            Assert.IsTrue(result.GetType() == typeof(NotFoundResult));
+        }
+
 
         [Test]
         public void AddIngredientsListItem_WithValidationError_ReturnsBadRequestResult()

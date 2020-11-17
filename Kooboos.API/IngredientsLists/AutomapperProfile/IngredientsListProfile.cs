@@ -9,6 +9,11 @@ namespace Kooboos.API.IngredientsLists.AutomapperProfile
         public IngredientsListProfile()
         {
             CreateMap<IngredientsList, IngredientsListDto>().ForMember(dest => dest.IngredientsListItems, opts => opts.Ignore());
+            CreateMap<IngredientsListForCreationDto, IngredientsList>()
+                .ForMember(dest => dest.IngredientsListItems, opts => opts.Ignore())
+                .ForMember(dest => dest.Id, opts => opts.Ignore())
+                .ForMember(dest => dest.RecipeId, opts => opts.Ignore())
+                .ForMember(dest => dest.Recipe, opts => opts.Ignore());
             CreateMap<IngredientsListItem, IngredientsListItemDto>()
                 .ForMember(dest => dest.IngredientName, opts => opts.MapFrom(src => src.Ingredient.Name))
                 .ForMember(dest => dest.UnitName, opts => opts.MapFrom(src => src.Unit.Name));
