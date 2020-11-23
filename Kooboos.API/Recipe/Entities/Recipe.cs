@@ -13,9 +13,10 @@ namespace Kooboos.API.Recipes.Entities
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(100)]
         public string Title { get; set; }
 
+        [StringLength(5000)]
         public string Instruction { get; set; }
 
         public ICollection<IngredientsList> IngredientsLists { get; set; } = new List<IngredientsList>();
